@@ -16,6 +16,7 @@ public final class DrawPanel extends JPanel {
     private final ArrayList<Drawable> shapesList;
     private final Random rnd;
     private int i = 0, startx, starty, lastx, lasty;
+    private Drawable selected;
     private BasicStroke stroke;
     private Color fillColor = new Color(0,0,0, 0);
     private Drawable moveShape;
@@ -44,23 +45,9 @@ public final class DrawPanel extends JPanel {
         stroke = new BasicStroke((float) s, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
     }
     
-    public void delRandomShape(){
-        int remove;
-        if(shapesList.size() > 0) {
-            if(shapesList.size() == 1){
-                remove = 0;
-            } else {
-                remove = rnd.nextInt(shapesList.size() - 1);
-            }
-            if(remove < i)
-                i--;
-            shapesList.remove(remove);
-            repaint();
-        }
-    }
-    
     public void setTool(ToolName tool){
         this.tool = tool;
+        System.out.println(tool);
     }
     
     private int shapeAtClick(int x, int y){
@@ -77,13 +64,21 @@ public final class DrawPanel extends JPanel {
     }
     
     public void click(int x, int y){
+        System.out.println(tool);
         if(tool == ToolName.DELETE){
             int shape = shapeAtClick(x, y);
             if(shape > -1){
                 shapesList.remove(shape);
             }
-            repaint();
+        } else if (tool == ToolName.MOVE){
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+            });
+            if(shapeAtClick(x, y) >= 0){
+                shapesList.get(shapeAtClick(x, y)).select(true);
+            }
         }
+        repaint();
     }
     private int clamp(int x, int min, int max){
         x = Math.max(min, Math.min(max, x));
@@ -95,7 +90,7 @@ public final class DrawPanel extends JPanel {
         x = clamp(x, (int) stroke.getLineWidth() - 1, this.getSize().width - (int) stroke.getLineWidth());
         y = clamp(y, (int) stroke.getLineWidth() - 1, this.getSize().height - (int) stroke.getLineWidth());
         
-        if(tool != ToolName.MOVE && tool != ToolName.DELETE){
+        if(tool == ToolName.ELLIPSE || tool == ToolName.RECTANGLE || tool == ToolName.LINE || tool == ToolName.IMAGE){
             Drawable shape = shapesList.get(shapesList.size() - 1);
             shape.setCoords(new Tuple4d(startx, starty, x, y));
             shapesList.set(shapesList.size() - 1, shape);
@@ -131,7 +126,7 @@ public final class DrawPanel extends JPanel {
         starty = y;
         Drawable shape = null;
         if(tool == ToolName.RECTANGLE || tool == ToolName.ELLIPSE ||
-                tool == ToolName.LINE){
+                tool == ToolName.LINE || tool == ToolName.IMAGE){
             switch(tool){
                 case RECTANGLE:
                     shape = new MyRectangle(x, y, x, y, stroke, fillColor);
@@ -142,10 +137,17 @@ public final class DrawPanel extends JPanel {
                 case LINE:
                     shape = new MyLine(x, y, x, y, stroke);
                     break;
+                case IMAGE:
+                    shape = new MyImage(x, y, x, y);
+                    break;
             }
             shapesList.add(shape); 
         } else if(tool == ToolName.MOVE){
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+            });
             if(shapeAtClick(x, y) >= 0){
+                shapesList.get(shapeAtClick(x, y)).select(true);
                 moveShape = shapesList.get(shapeAtClick(x, y));
             }
         }

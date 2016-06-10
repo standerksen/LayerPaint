@@ -37,6 +37,12 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
             case "Line":
                 this.drawPanel.setTool(ToolName.LINE);
                 break;
+            case "Fill":
+                this.drawPanel.setTool(ToolName.FILL);
+                break;
+            case "Image":
+                this.drawPanel.setTool(ToolName.IMAGE);
+                break;
         }
     }
     

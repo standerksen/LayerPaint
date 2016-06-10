@@ -8,6 +8,7 @@ import java.awt.geom.Rectangle2D;
 
 public class MyRectangle implements Drawable, Fillable {
 
+    public boolean selected;
     private double x1, y1, x2, y2;
     private Stroke stroke;
     private Color color = null;
@@ -92,5 +93,10 @@ public class MyRectangle implements Drawable, Fillable {
             double height = getHeight();
             Rectangle2D r = new Rectangle2D.Double(getStartX(), getStartY(), width, height);
             return r.contains(x, y);
+        }
+        
+        @Override
+        public void select(boolean select) {
+            selected = select;
         }
 }

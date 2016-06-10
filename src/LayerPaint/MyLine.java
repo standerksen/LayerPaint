@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Line2D;
-import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
 public class MyLine implements Drawable {
-        
+    
+    private static final double HIT_BOX_SIZE = 10;
+    
+    public boolean selected = false;
     private double x1, y1, x2, y2;
     private Color color = null;
     private Stroke stroke;
+    
 
     public MyLine() {
     }
@@ -43,6 +47,12 @@ public class MyLine implements Drawable {
             Line2D r = new Line2D.Double(x1, y1, x2, y2);
             g.setStroke(stroke);
             g.draw(r);
+            if(selected){
+                Rectangle2D s = new Rectangle2D.Double(x1, y1, x2-x1, y2-y1);
+                g.setStroke(dashed);
+                g.setColor(Color.BLACK);
+                g.draw(s);
+            }
     }
 
     public Tuple4d getCoords() {
@@ -62,7 +72,19 @@ public class MyLine implements Drawable {
     
     @Override
     public boolean contains(double x, double y) {
+        int boxX = (int) (x - (HIT_BOX_SIZE / 2));
+        int boxY = (int) (y - (HIT_BOX_SIZE) / 2);
+        int width = (int) HIT_BOX_SIZE;
+        int height = (int) HIT_BOX_SIZE;
+        Rectangle2D b = new Rectangle2D.Double(x, y, width, height);
+        System.out.println(b);
         Line2D r = new Line2D.Double(x1, y1, x2, y2);
-        return r.contains(x, y);
+        System.out.println(r);
+        return r.intersects(b);
+    }
+
+    @Override
+    public void select(boolean select) {
+        selected = select;
     }
 }

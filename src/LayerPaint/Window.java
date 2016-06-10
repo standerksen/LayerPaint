@@ -7,14 +7,8 @@ import javax.swing.UIManager;
 
 public class Window extends JFrame {
     
-    
     public Window() {
         super();
-        try {
-            UIManager.setLookAndFeel("com.seaglasslookandfeel.SeaGlassLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         setTitle("Superclicker");
         setSize(new Dimension(500, 500));
         setLocationRelativeTo(null);

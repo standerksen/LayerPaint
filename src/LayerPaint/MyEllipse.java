@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 
 public class MyEllipse implements Drawable, Fillable {
         
+        public boolean selected = false;
 	private double x1, y1, x2, y2;
         private Color color = null;
         private Stroke stroke;
@@ -46,6 +48,12 @@ public class MyEllipse implements Drawable, Fillable {
 		double width = getWidth();
 		double height = getHeight();
 		Ellipse2D r = new Ellipse2D.Double(x, y, width, height);
+                if(selected){
+                    Rectangle2D s = new Rectangle2D.Double(x, y, width, height);
+                    g.setStroke(dashed);
+                    g.setColor(Color.BLACK);
+                    g.draw(s);
+                }
                 g.setStroke(stroke);
                 g.draw(r);
                 g.setColor(color);
@@ -94,5 +102,10 @@ public class MyEllipse implements Drawable, Fillable {
         double height = getHeight();
         Ellipse2D r = new Ellipse2D.Double(getStartX(), getStartY(), width, height);
         return r.contains(x, y);
+    }
+    
+    @Override
+    public void select(boolean select) {
+        selected = select;
     }
 }
