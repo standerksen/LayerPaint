@@ -11,11 +11,11 @@ import javax.swing.event.ChangeListener;
 
 public class InputHandler implements ActionListener, ChangeListener, MouseListener, MouseMotionListener {
     private final DrawPanel drawPanel;
-    private final ButtonPanel buttonPanel;
+    private final SidebarPanel sidebarPanel;
     
-    public InputHandler(DrawPanel drawPanel, ButtonPanel buttonPanel) {
+    public InputHandler(DrawPanel drawPanel, SidebarPanel sidebarPanel) {
         this.drawPanel = drawPanel;
-        this.buttonPanel = buttonPanel;
+        this.sidebarPanel = sidebarPanel;
     }
     
     @Override
