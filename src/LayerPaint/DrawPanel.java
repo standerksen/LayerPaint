@@ -23,6 +23,7 @@ public final class DrawPanel extends JPanel {
     
     public DrawPanel() {
         super();
+        this.setBackground(Color.WHITE);
         this.rnd = new Random();
         this.shapesList = new ArrayList<>();
         this.setStroke(1);

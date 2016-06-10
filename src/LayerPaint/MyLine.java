@@ -48,7 +48,7 @@ public class MyLine implements Drawable {
             g.setStroke(stroke);
             g.draw(r);
             if(selected){
-                Rectangle2D s = new Rectangle2D.Double(x1, y1, x2-x1, y2-y1);
+                Rectangle2D s = new Rectangle2D.Double(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2-x1), Math.abs(y2-y1));
                 g.setStroke(dashed);
                 g.setColor(Color.BLACK);
                 g.draw(s);
