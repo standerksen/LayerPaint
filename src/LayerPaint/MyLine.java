@@ -11,11 +11,11 @@ public class MyLine implements Drawable {
     private static final double HIT_BOX_SIZE = 10;
     
     public boolean selected = false;
+    public SelectBox s;
     private double x1, y1, x2, y2;
     private Color color = null;
     private Stroke stroke;
     
-
     public MyLine() {
     }
 
@@ -48,10 +48,7 @@ public class MyLine implements Drawable {
             g.setStroke(stroke);
             g.draw(r);
             if(selected){
-                Rectangle2D s = new Rectangle2D.Double(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2-x1), Math.abs(y2-y1));
-                g.setStroke(dashed);
-                g.setColor(Color.BLACK);
-                g.draw(s);
+                s.draw(g);
             }
     }
 
@@ -59,16 +56,22 @@ public class MyLine implements Drawable {
         return new Tuple4d(x1, y1, x2, y2);
     }
     
+    public SelectBox getBox(){
+            return s;
+        }
+    
     public void setCoords( Tuple4d tuple){
         x1 = tuple.x;
         y1 = tuple.y;
         x2 = tuple.z;
         y2 = tuple.w;
+        s = new SelectBox(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2-x1), Math.abs(y2-y1));
     }
     
     public void setColor(Color color){
         this.color = color;
     }
+    
     
     @Override
     public boolean contains(double x, double y) {
@@ -76,7 +79,7 @@ public class MyLine implements Drawable {
         int boxY = (int) (y - (HIT_BOX_SIZE) / 2);
         int width = (int) HIT_BOX_SIZE;
         int height = (int) HIT_BOX_SIZE;
-        Rectangle2D b = new Rectangle2D.Double(x, y, width, height);
+        Rectangle2D b = new Rectangle2D.Double(boxX, boxY, width, height);
         System.out.println(b);
         Line2D r = new Line2D.Double(x1, y1, x2, y2);
         System.out.println(r);

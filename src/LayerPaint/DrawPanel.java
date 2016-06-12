@@ -2,6 +2,7 @@ package LayerPaint;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
@@ -15,7 +16,7 @@ public final class DrawPanel extends JPanel {
     private ToolName tool = ToolName.RECTANGLE;
     private final ArrayList<Drawable> shapesList;
     private final Random rnd;
-    private int i = 0, startx, starty, lastx, lasty;
+    private int startx, starty, lastx, lasty, movePoint;
     private Drawable selected;
     private BasicStroke stroke;
     private Color fillColor = new Color(0,0,0, 0);
@@ -48,7 +49,47 @@ public final class DrawPanel extends JPanel {
     
     public void setTool(ToolName tool){
         this.tool = tool;
-        System.out.println(tool);
+    }
+    
+    public void mouse(double x, double y){
+        if(selected instanceof Drawable){
+            SelectBox s = selected.getBox();
+            movePoint = s.contains(x,y);
+            switch (movePoint) {
+                case 1:
+                    setCursor(new Cursor(Cursor.NW_RESIZE_CURSOR));
+                    break;
+                case 2:
+                    setCursor(new Cursor(Cursor.N_RESIZE_CURSOR));
+                    break;
+                case 3:
+                    setCursor(new Cursor(Cursor.NE_RESIZE_CURSOR));
+                    break;
+                case 4:
+                    setCursor(new Cursor(Cursor.W_RESIZE_CURSOR));
+                    break;
+                case 5:
+                    setCursor(new Cursor(Cursor.E_RESIZE_CURSOR));
+                    break;
+                case 6:
+                    setCursor(new Cursor(Cursor.SW_RESIZE_CURSOR));
+                    break;
+                case 7:
+                    setCursor(new Cursor(Cursor.S_RESIZE_CURSOR));
+                    break;
+                case 8:
+                    setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
+                    break;
+                case 9:
+                    setCursor(new Cursor(Cursor.MOVE_CURSOR));
+                    break;
+                default:
+                    setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                    break;
+            }
+        } else {
+            setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        }
     }
     
     private int shapeAtClick(int x, int y){
@@ -74,9 +115,11 @@ public final class DrawPanel extends JPanel {
         } else if (tool == ToolName.MOVE){
             shapesList.stream().forEach((s) -> {
                 s.select(false);
+                selected = null;
             });
             if(shapeAtClick(x, y) >= 0){
                 shapesList.get(shapeAtClick(x, y)).select(true);
+                selected = shapesList.get(shapeAtClick(x, y));
             }
         }
         repaint();
@@ -88,33 +131,105 @@ public final class DrawPanel extends JPanel {
     
     public void moveClick(int x, int y)
     {
-        x = clamp(x, (int) stroke.getLineWidth() - 1, this.getSize().width - (int) stroke.getLineWidth());
-        y = clamp(y, (int) stroke.getLineWidth() - 1, this.getSize().height - (int) stroke.getLineWidth());
+        int x1, y1, x2, y2, changex, changey;
+        BasicStroke curStroke;
+        Tuple4d oldCoords;
+        Drawable shape;
+        
+        if(selected != null){
+            curStroke = (BasicStroke) selected.stroke();
+        } else {
+            curStroke = this.stroke;
+        }
+            x = clamp(x, (int) stroke.getLineWidth() - 1, this.getSize().width - (int) curStroke.getLineWidth());
+            y = clamp(y, (int) stroke.getLineWidth() - 1, this.getSize().height - (int) curStroke.getLineWidth());
         
         if(tool == ToolName.ELLIPSE || tool == ToolName.RECTANGLE || tool == ToolName.LINE || tool == ToolName.IMAGE){
-            Drawable shape = shapesList.get(shapesList.size() - 1);
+            shape = shapesList.get(shapesList.size() - 1);
             shape.setCoords(new Tuple4d(startx, starty, x, y));
             shapesList.set(shapesList.size() - 1, shape);
         } else if(tool == ToolName.MOVE){
-            if(moveShape != null){
+            if(selected != null){
                 if(lastx + lasty < 0){
                     lastx = startx;
                     lasty = starty;
                 }
-                int changex = lastx - x;
-                int changey = lasty - y;
-                Tuple4d oldCoords = moveShape.getCoords();
-                int x1 = clamp((int) oldCoords.x - changex, 0, this.getSize().width - 1);
-                int y1 = clamp((int) oldCoords.y - changey, 0, this.getSize().height - 1);
-                int x2 = clamp((int) oldCoords.z - changex, 0, this.getSize().width - 1);
-                int y2 = clamp((int) oldCoords.w - changey, 0, this.getSize().height - 1);
+                changex = lastx - x;
+                changey = lasty - y;
+                oldCoords = selected.getCoords();
                 
-                if(x1 == (int) oldCoords.x - changex &&
-                        y1 == (int) oldCoords.y - changey &&
-                        x2 == oldCoords.z - changex &&
-                        y2 == (int) oldCoords.w - changey){
-                    moveShape.setCoords(new Tuple4d(x1, y1, x2, y2));
+                switch (movePoint) {
+                    case 9:
+                        x1 = clamp((int) oldCoords.x - changex, 0, this.getSize().width - 1);
+                        y1 = clamp((int) oldCoords.y - changey, 0, this.getSize().height - 1);
+                        x2 = clamp((int) oldCoords.z - changex, 0, this.getSize().width - 1);
+                        y2 = clamp((int) oldCoords.w - changey, 0, this.getSize().height - 1);
+                        if((int) oldCoords.x - changex < 0){
+                            x2 = (int) oldCoords.z;
+                        } else if((int) oldCoords.y - changey < 0){
+                            y2 = (int) oldCoords.w;
+                        } else if((int) oldCoords.z - changex > this.getSize().width - 1){
+                            x1 = (int) oldCoords.x;
+                        } else if((int) oldCoords.w - changey > this.getSize().height - 1){
+                            y1 = (int) oldCoords.y;
+                        }   break;
+                    case 1:
+                        x1 = clamp((int) oldCoords.x - changex, 0, this.getSize().width - 1);
+                        y1 = clamp((int) oldCoords.y - changey, 0, this.getSize().height - 1);
+                        x2 = (int) oldCoords.z;
+                        y2 = (int) oldCoords.w;
+                        break;
+                    case 2:
+                        x1 = (int) oldCoords.x ;
+                        y1 = clamp((int) oldCoords.y - changey, 0, this.getSize().height - 1);
+                        x2 =(int) oldCoords.z ;
+                        y2 = (int) oldCoords.w;
+                        break;
+                    case 3:
+                        x1 = (int) oldCoords.x;
+                        y1 = clamp((int) oldCoords.y - changey, 0, this.getSize().height - 1);
+                        x2 = clamp((int) oldCoords.z - changex, 0, this.getSize().width - 1);
+                        y2 = (int) oldCoords.w;
+                        break;
+                    case 4:
+                        x1 = clamp((int) oldCoords.x - changex, 0, this.getSize().width - 1);
+                        y1 = (int) oldCoords.y;
+                        x2 = (int) oldCoords.z;
+                        y2 = (int) oldCoords.w;
+                        break;
+                    case 5:
+                        x1 = (int) oldCoords.x;
+                        y1 = (int) oldCoords.y;
+                        x2 = clamp((int) oldCoords.z - changex, 0, this.getSize().width - 1);
+                        y2 = (int) oldCoords.w;
+                        break;
+                    case 6:
+                        x1 = clamp((int) oldCoords.x - changex, 0, this.getSize().width - 1);
+                        y1 = (int) oldCoords.y;
+                        x2 = (int) oldCoords.z;
+                        y2 = clamp((int) oldCoords.w - changey, 0, this.getSize().height - 1);
+                        break;
+                    case 7:
+                        x1 = (int) oldCoords.x;
+                        y1 = (int) oldCoords.y;
+                        x2 = (int) oldCoords.z;
+                        y2 = clamp((int) oldCoords.w - changey, 0, this.getSize().height - 1);
+                        break;
+                    case 8:
+                        x1 = (int) oldCoords.x;
+                        y1 = (int) oldCoords.y;
+                        x2 = clamp((int) oldCoords.z - changex, 0, this.getSize().width - 1);
+                        y2 = clamp((int) oldCoords.w - changey, 0, this.getSize().height - 1);
+                        break;
+                    default:
+                        x1 = (int) oldCoords.x;
+                        y1 = (int) oldCoords.y;
+                        x2 = (int) oldCoords.z;
+                        y2 = (int) oldCoords.w;
+                        break;
                 }
+                
+                selected.setCoords(new Tuple4d(x1, y1, x2, y2));
             }
         }
         lastx = x;
@@ -144,12 +259,14 @@ public final class DrawPanel extends JPanel {
             }
             shapesList.add(shape); 
         } else if(tool == ToolName.MOVE){
-            shapesList.stream().forEach((s) -> {
-                s.select(false);
-            });
-            if(shapeAtClick(x, y) >= 0){
-                shapesList.get(shapeAtClick(x, y)).select(true);
-                moveShape = shapesList.get(shapeAtClick(x, y));
+            if(movePoint == 0) {
+                shapesList.stream().forEach((s) -> {
+                    s.select(false);
+                });
+                if(shapeAtClick(x, y) >= 0 || movePoint > 0){
+                    shapesList.get(shapeAtClick(x, y)).select(true);
+                    selected = shapesList.get(shapeAtClick(x, y));
+                }
             }
         }
         repaint();
@@ -163,9 +280,10 @@ public final class DrawPanel extends JPanel {
                 shapesList.remove(shapesList.size() - 1);
             }
         }
-        if(tool == ToolName.MOVE){
-            moveShape = null;
-        }
+        shapesList.stream().forEach((s) -> {
+            s.select(false);
+        });
+        
         lastx = -1;
         lasty = -1;
     }

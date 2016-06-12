@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.Rectangle2D;
 
 public class MyRectangle implements Drawable, Fillable {
 
     public boolean selected;
+    public SelectBox s;
     private double x1, y1, x2, y2;
     private Stroke stroke;
     private Color color = null;
@@ -36,6 +36,11 @@ public class MyRectangle implements Drawable, Fillable {
             return stroke;
         }
         
+    @Override
+        public SelectBox getBox(){
+            return s;
+        }
+        
         @Override
         public boolean equals(Object other){
             return other instanceof MyRectangle;
@@ -43,16 +48,19 @@ public class MyRectangle implements Drawable, Fillable {
 
 	@Override
 	public void draw(Graphics2D g) {
-		double x = getStartX();
-		double y = getStartY();
-		double width = getWidth();
-		double height = getHeight();
-		Rectangle2D r = new Rectangle2D.Double(x, y, width, height);
-                g.setStroke(stroke);
-                g.draw(r);
-                g.setColor(color);
-                g.fill(r);
-                g.setColor(Color.BLACK);
+            double x = getStartX();
+            double y = getStartY();
+            double width = getWidth();
+            double height = getHeight();
+            Rectangle2D r = new Rectangle2D.Double(x, y, width, height);
+            g.setStroke(stroke);
+            g.draw(r);
+            g.setColor(color);
+            g.fill(r);
+            g.setColor(Color.BLACK);
+            if(selected){
+                s.draw(g);
+            }
 	}
 
 	private double getWidth() {
@@ -76,27 +84,28 @@ public class MyRectangle implements Drawable, Fillable {
         }
         
     @Override
-        public void setCoords(Tuple4d tuple){
-            x1 = tuple.x;
-            y1 = tuple.y;
-            x2 = tuple.z;
-            y2 = tuple.w;
-        }
-        
-        public void setColor(Color color){
-            this.color = color;
-        }
-        
-        @Override
-        public boolean contains(double x, double y) {
-            double width = getWidth();
-            double height = getHeight();
-            Rectangle2D r = new Rectangle2D.Double(getStartX(), getStartY(), width, height);
-            return r.contains(x, y);
-        }
-        
-        @Override
-        public void select(boolean select) {
-            selected = select;
-        }
+    public void setCoords(Tuple4d tuple){
+        x1 = tuple.x;
+        y1 = tuple.y;
+        x2 = tuple.z;
+        y2 = tuple.w;
+        s = new SelectBox(getStartX()-1, getStartY()-1, getWidth()+2, getHeight()+2);
+    }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
+
+    @Override
+    public boolean contains(double x, double y) {
+        double width = getWidth();
+        double height = getHeight();
+        Rectangle2D r = new Rectangle2D.Double(getStartX(), getStartY(), width, height);
+        return r.contains(x, y);
+    }
+
+    @Override
+    public void select(boolean select) {
+        selected = select;
+    }
 }

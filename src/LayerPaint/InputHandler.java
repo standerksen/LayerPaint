@@ -78,7 +78,7 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        
+        drawPanel.mouse(e.getX(), e.getY());
     }
 
     @Override

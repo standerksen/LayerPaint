@@ -28,6 +28,7 @@ public class MyImage implements Drawable {
     private static final String IMG_PATH = "src/resources/black.png";
     
     public boolean selected;
+    public SelectBox s;
     private double x1, y1, x2, y2;
     private BufferedImage image;
     
@@ -64,10 +65,7 @@ public class MyImage implements Drawable {
         height = y1 > y2 ? -height : height;
         g.drawImage(image, (int) x1, (int) y1, width, height, null);
         if(selected){
-            Rectangle2D s = new Rectangle2D.Double(x1, y1, width, height);
-            g.setStroke(dashed);
-            g.setColor(Color.BLACK);
-            g.draw(s);
+            s.draw(g);
         }
     }
 
@@ -106,6 +104,11 @@ public class MyImage implements Drawable {
         y1 = tuple.y;
         x2 = tuple.z;
         y2 = tuple.w;
+        s = new SelectBox(x1, y1, getWidth(), getHeight());
+    }
+    
+    public SelectBox getBox(){
+        return s;
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 public class MyEllipse implements Drawable, Fillable {
         
         public boolean selected = false;
+        public SelectBox s;
 	private double x1, y1, x2, y2;
         private Color color = null;
         private Stroke stroke;
@@ -40,6 +41,10 @@ public class MyEllipse implements Drawable, Fillable {
         public boolean equals(Object other){
             return other instanceof MyEllipse;
         }
+        
+        public SelectBox getBox(){
+            return s;
+        }
 
 	@Override
 	public void draw(Graphics2D g) {
@@ -48,17 +53,16 @@ public class MyEllipse implements Drawable, Fillable {
 		double width = getWidth();
 		double height = getHeight();
 		Ellipse2D r = new Ellipse2D.Double(x, y, width, height);
-                if(selected){
-                    Rectangle2D s = new Rectangle2D.Double(x, y, width, height);
-                    g.setStroke(dashed);
-                    g.setColor(Color.BLACK);
-                    g.draw(s);
-                }
+                
                 g.setStroke(stroke);
                 g.draw(r);
                 g.setColor(color);
                 g.fill(r);
                 g.setColor(Color.BLACK);
+                if(selected){
+                    s = new SelectBox(x, y, width, height);
+                    s.draw(g);
+                }
 	}
 
 	private double getWidth() {
