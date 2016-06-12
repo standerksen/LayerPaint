@@ -5,9 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 import javax.swing.JPanel;
 
@@ -280,9 +278,6 @@ public final class DrawPanel extends JPanel {
                 shapesList.remove(shapesList.size() - 1);
             }
         }
-        shapesList.stream().forEach((s) -> {
-            s.select(false);
-        });
         
         lastx = -1;
         lasty = -1;
