@@ -1,11 +1,9 @@
 package LayerPaint;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 
 public interface Drawable {
-    
+
     public SelectBox getBox();
 
     public void select(boolean select);
@@ -16,6 +14,6 @@ public interface Drawable {
 
     public boolean contains(double x, double y);
 
-    public void setCoords( Tuple4d tuple);
+    public void setCoords(Tuple4d tuple);
 
 }

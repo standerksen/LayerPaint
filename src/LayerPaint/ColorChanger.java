@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LayerPaint;
 
 import java.awt.Color;
@@ -15,13 +10,16 @@ import javax.swing.event.ChangeListener;
  * @author Pieter
  */
 class ColorChanger implements ChangeListener {
-    public enum mode {FILL, STROKE};
-    
+
+    public enum mode {
+        FILL, STROKE
+    };
+
     private final DrawPanel drawPanel;
     private final JColorChooser colorChooser;
     private final mode m;
     private final PreviewPanel colorPreviewPanel;
-    
+
     public ColorChanger(DrawPanel drawPanel, PreviewPanel colorPreviewPanel, JColorChooser colorChooser, mode m) {
         this.drawPanel = drawPanel;
         this.colorChooser = colorChooser;
@@ -32,13 +30,13 @@ class ColorChanger implements ChangeListener {
     @Override
     public void stateChanged(ChangeEvent e) {
         Color color = colorChooser.getColor();
-        if(m == mode.FILL){
+        if (m == mode.FILL) {
             drawPanel.setFillColor(color);
             colorPreviewPanel.setFillColor(color);
-        } else if(m == mode.STROKE){
+        } else if (m == mode.STROKE) {
             drawPanel.setStrokeColor(color);
             colorPreviewPanel.setStrokeColor(color);
         }
     }
-    
+
 }

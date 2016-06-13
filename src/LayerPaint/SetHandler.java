@@ -6,18 +6,20 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 public class SetHandler implements ActionListener {
-    private JTextField colorInput;
-    private DrawPanel drawPanel;
-    
+
+    private final JTextField colorInput;
+    private final DrawPanel drawPanel;
+
     public SetHandler(JTextField colorInput, DrawPanel drawPanel) {
         this.colorInput = colorInput;
         this.drawPanel = drawPanel;
     }
-    
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(e);
         String hexColor = colorInput.getText();
-        if(hexColor.length() == 6) {
+        if (hexColor.length() == 6) {
             this.drawPanel.repaint();
             this.colorInput.setBackground(Color.WHITE);
         } else {

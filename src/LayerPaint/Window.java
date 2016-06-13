@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 public class Window extends JFrame {
+
     public Window() {
         super();
         setTitle("LayerPaint");
@@ -16,15 +17,13 @@ public class Window extends JFrame {
 
         DrawPanel dp = new DrawPanel();
         dp.addKeyListener(new InputHandler(dp));
-//        SidebarPanel sp = new SidebarPanel(dp);
+
         JToolBar tb = new SidebarPanel(dp);
-//        sp.setPreferredSize(new Dimension(100, 100));
-//        sp.setPreferredSize(new Dimension(100, 100));
 
         getContentPane().add(dp, BorderLayout.CENTER);
-        //getContentPane().add(sp, BorderLayout.WEST);
+
         getContentPane().add(tb, BorderLayout.WEST);
-        
+
         setVisible(true);
     }
 }

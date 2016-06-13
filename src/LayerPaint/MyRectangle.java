@@ -19,16 +19,16 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
     }
 
     public MyRectangle(double x1, double y1, double x2, double y2, BasicStroke stroke, Color color, Color strokeColor) {
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
-            this.stroke = stroke;
-            this.color = color;
-            this.strokeColor = strokeColor;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.stroke = stroke;
+        this.color = color;
+        this.strokeColor = strokeColor;
     }
 
-    public MyRectangle(Tuple4d location){
+    public MyRectangle(Tuple4d location) {
         x1 = location.x;
         y1 = location.y;
         x2 = location.z;
@@ -36,26 +36,13 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
     }
 
     @Override
-    public BasicStroke stroke(){
+    public BasicStroke stroke() {
         return stroke;
-    }
-        
-    @Override
-    public SelectBox getBox(){
-        return s;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.x1) ^ (Double.doubleToLongBits(this.x1) >>> 32));
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.y1) ^ (Double.doubleToLongBits(this.y1) >>> 32));
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.x2) ^ (Double.doubleToLongBits(this.x2) >>> 32));
-        hash = 17 * hash + (int) (Double.doubleToLongBits(this.y2) ^ (Double.doubleToLongBits(this.y2) >>> 32));
-        hash = 17 * hash + Objects.hashCode(this.stroke);
-        hash = 17 * hash + Objects.hashCode(this.strokeColor);
-        hash = 17 * hash + Objects.hashCode(this.color);
-        return hash;
+    public SelectBox getBox() {
+        return s;
     }
 
     @Override
@@ -71,49 +58,49 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
         g.setColor(strokeColor);
         g.draw(r);
         g.setColor(Color.BLACK);
-        
-        if(selected){
+
+        if (selected) {
             s.draw(g);
         }
     }
 
     private double getWidth() {
-            return Math.abs(x1 - x2);
+        return Math.abs(x1 - x2);
     }
 
     private double getHeight() {
-            return Math.abs(y1 - y2);
+        return Math.abs(y1 - y2);
     }
 
     private double getStartX() {
-            return Math.min(x1, x2);
+        return Math.min(x1, x2);
     }
 
     private double getStartY() {
-            return Math.min(y1, y2);
+        return Math.min(y1, y2);
     }
 
     @Override
     public Tuple4d getCoords() {
         return new Tuple4d(x1, y1, x2, y2);
     }
-        
+
     @Override
-    public void setCoords(Tuple4d tuple){
+    public void setCoords(Tuple4d tuple) {
         x1 = tuple.x;
         y1 = tuple.y;
         x2 = tuple.z;
         y2 = tuple.w;
-        s = new SelectBox(getStartX() - 1, getStartY() - 1 , getWidth() + 2, getHeight() + 2);
+        s = new SelectBox(getStartX() - 1, getStartY() - 1, getWidth() + 2, getHeight() + 2);
     }
 
     @Override
-    public void setColor(Color c){
+    public void setColor(Color c) {
         color = c;
     }
-    
+
     @Override
-    public void setStrokeColor(Color c){
+    public void setStrokeColor(Color c) {
         strokeColor = c;
     }
 
@@ -129,7 +116,7 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
     public void select(boolean select) {
         selected = select;
     }
-    
+
     @Override
     public void setStroke(BasicStroke s) {
         stroke = s;

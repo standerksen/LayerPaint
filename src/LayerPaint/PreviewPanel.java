@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LayerPaint;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Stroke;
 import javax.swing.JColorChooser;
 import javax.swing.JComponent;
 
@@ -33,7 +26,7 @@ class PreviewPanel extends JComponent {
         g.setColor(strokeColor);
         g.fillRect(0, 0, getWidth(), getHeight());
         g.setColor(fillColor);
-        g.fillRect(stroke, stroke, getWidth() - (int) stroke * 2, getHeight() - stroke * 2);
+        g.fillRect(stroke, stroke, getWidth() - stroke * 2, getHeight() - stroke * 2);
     }
 
     public void setFillColor(Color color) {
