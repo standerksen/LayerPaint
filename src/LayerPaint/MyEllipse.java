@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Ellipse2D;
 
-public class MyEllipse implements Drawable, Fillable {
+public class MyEllipse implements Drawable, Fillable, Strokeable {
         
     public boolean selected = false;
     public SelectBox s;
@@ -123,6 +123,11 @@ public class MyEllipse implements Drawable, Fillable {
     @Override
     public void select(boolean select) {
         selected = select;
+    }
+
+    @Override
+    public void setString(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

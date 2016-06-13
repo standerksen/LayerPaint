@@ -21,6 +21,7 @@ public final class DrawPanel extends JPanel {
         super();
         this.setBackground(Color.WHITE);
         this.shapesList = new ArrayList<>();
+        this.setFocusable(true);
     }
     
     @Override
@@ -54,6 +55,10 @@ public final class DrawPanel extends JPanel {
     
     public void setTool(ToolName tool){
         this.tool = tool;
+    }
+    
+    public ToolName getTool(){
+        return tool;
     }
     
     public void mouse(double x, double y){
@@ -111,7 +116,6 @@ public final class DrawPanel extends JPanel {
     }
     
     public void click(int x, int y){
-        System.out.println(tool);
         if(tool == ToolName.DELETE){
             int shape = shapeAtClick(x, y);
             if(shape > -1){
@@ -126,9 +130,19 @@ public final class DrawPanel extends JPanel {
                 shapesList.get(shapeAtClick(x, y)).select(true);
                 selected = shapesList.get(shapeAtClick(x, y));
             }
+        } else if(tool == ToolName.TEXT){
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+                selected = null;
+            });
+            shapesList.add(new MyText(x,y, fillColor));
+            shapesList.get(shapesList.size() - 1).select(true);
+            selected = shapesList.get(shapesList.size() - 1);
         }
         repaint();
+        
     }
+    
     private int clamp(int x, int min, int max){
         x = Math.max(min, Math.min(max, x));
         return x;
@@ -141,8 +155,9 @@ public final class DrawPanel extends JPanel {
         Tuple4d oldCoords;
         Drawable shape;
         
-        if(selected != null){
-            curStroke = (BasicStroke) selected.stroke();
+        if(selected != null && selected instanceof Strokeable){
+            Strokeable strokeSelected = (Strokeable) selected;
+            curStroke = (BasicStroke) strokeSelected.stroke();
         } else {
             curStroke = this.stroke;
         }
@@ -288,5 +303,29 @@ public final class DrawPanel extends JPanel {
         
         lastx = -1;
         lasty = -1;
+    }
+    
+    public void backspace(){
+        System.out.println("BS");
+        if(selected instanceof MyText){
+            MyText textSelected = (MyText) selected;
+            String str = textSelected.getString();
+            if (str != null && str.length() > 0) {
+                str = str.substring(0, str.length()-1);
+            }
+            selected.setString(str);
+            
+            repaint();
+        }
+    }
+
+    public void type(char keyChar) {
+        System.out.println(keyChar);
+        if(selected instanceof MyText){
+            MyText textSelected = (MyText) selected;
+            selected.setString(textSelected.getString() + keyChar);
+            
+            repaint();
+        }
     }
 }

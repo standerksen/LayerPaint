@@ -2,6 +2,8 @@ package LayerPaint;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -9,10 +11,17 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class InputHandler implements ActionListener, ChangeListener, MouseListener, MouseMotionListener {
+public class InputHandler implements ActionListener, ChangeListener, MouseListener, MouseMotionListener, KeyListener {
     private final DrawPanel drawPanel;
     private final SidebarPanel sidebarPanel;
     private final PreviewPanel previewPanel;
+    private boolean backspace;
+    
+    public InputHandler(DrawPanel drawPanel){
+        this.drawPanel = drawPanel;
+        sidebarPanel = null;
+        previewPanel = null;
+    }
     
     public InputHandler(DrawPanel drawPanel, PreviewPanel previewPanel, SidebarPanel sidebarPanel) {
         this.drawPanel = drawPanel;
@@ -45,27 +54,37 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
             case "Image":
                 this.drawPanel.setTool(ToolName.IMAGE);
                 break;
+            case "Text":
+                this.drawPanel.setTool(ToolName.TEXT);
+                break;
+            default:
+                this.drawPanel.setTool(null);
+                break;
         }
     }
     
     @Override
     public void mouseDragged(MouseEvent e){
         drawPanel.moveClick(e.getX(), e.getY());
+        this.drawPanel.requestFocusInWindow();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         drawPanel.click(e.getX(), e.getY());
+        this.drawPanel.requestFocusInWindow();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         drawPanel.startClick(e.getX(), e.getY());
+        this.drawPanel.requestFocusInWindow();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         drawPanel.stopClick(e.getX(), e.getY());
+        this.drawPanel.requestFocusInWindow();
     }
 
     @Override
@@ -88,5 +107,28 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
         JSlider source = (JSlider)e.getSource();
         drawPanel.setStroke(source.getValue());
         previewPanel.setStroke(source.getValue());
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        if(backspace){
+            drawPanel.backspace();
+        } else {
+            drawPanel.type(e.getKeyChar());
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            backspace = true;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            backspace = false;
+        }
     }
 }

@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.Rectangle2D;
 
-public class MyRectangle implements Drawable, Fillable {
+public class MyRectangle implements Drawable, Fillable, Strokeable {
 
     public boolean selected;
     public SelectBox s;
@@ -114,5 +114,10 @@ public class MyRectangle implements Drawable, Fillable {
     @Override
     public void select(boolean select) {
         selected = select;
+    }
+
+    @Override
+    public void setString(String string) {
+        
     }
 }

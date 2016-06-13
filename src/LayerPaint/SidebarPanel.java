@@ -11,7 +11,7 @@ public class SidebarPanel extends JToolBar {
     static final int MAX_STROKE = 10;
     static final int INIT_STROKE = 1;
 
-    private JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton;
+    private JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton, textButton;
     private JSlider strokeSlider;
     public JColorChooser fillColorChooser, strokeColorChooser;
     private final PreviewPanel previewPanel;
@@ -32,12 +32,14 @@ public class SidebarPanel extends JToolBar {
         rectShapeButton = new JButton(rectangle);
         elliShapeButton = new JButton(ellipse);
         lineShapeButton = new JButton(line);
+        textButton = new JButton("Text");
 
         movShapeButton.setActionCommand("Move");
         delShapeButton.setActionCommand("Delete");
         rectShapeButton.setActionCommand("Rectangle");
         elliShapeButton.setActionCommand("Ellipse");
         lineShapeButton.setActionCommand("Line");
+        textButton.setActionCommand("Text");
 
         strokeSlider = new JSlider(JSlider.HORIZONTAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
         strokeSlider.setMajorTickSpacing(2);
@@ -68,7 +70,7 @@ public class SidebarPanel extends JToolBar {
             }
         }
 
-        JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton};
+        JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton};
 
 //        delShapeButton.addActionListener(new InputHandler(drawPanel, this));
 //        movShapeButton.addActionListener(new InputHandler(drawPanel, this));

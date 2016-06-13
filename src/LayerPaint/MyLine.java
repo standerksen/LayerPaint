@@ -6,7 +6,7 @@ import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
-public class MyLine implements Drawable {
+public class MyLine implements Drawable, Strokeable {
     
     private static final double HIT_BOX_SIZE = 10;
     
@@ -95,5 +95,10 @@ public class MyLine implements Drawable {
     @Override
     public void select(boolean select) {
         selected = select;
+    }
+
+    @Override
+    public void setString(String string) {
+        
     }
 }

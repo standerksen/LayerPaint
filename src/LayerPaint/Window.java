@@ -15,6 +15,7 @@ public class Window extends JFrame {
         getContentPane().setLayout(new BorderLayout());
 
         DrawPanel dp = new DrawPanel();
+        dp.addKeyListener(new InputHandler(dp));
 //        SidebarPanel sp = new SidebarPanel(dp);
         JToolBar tb = new SidebarPanel(dp);
 //        sp.setPreferredSize(new Dimension(100, 100));

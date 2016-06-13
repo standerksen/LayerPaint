@@ -66,11 +66,6 @@ public class MyImage implements Drawable {
     }
 
     @Override
-    public Stroke stroke() {
-        return null;
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other instanceof MyImage;
     }
@@ -120,11 +115,6 @@ public class MyImage implements Drawable {
     }
 
     @Override
-    public void setStrokeColor(Color color) {
-
-    }
-
-    @Override
     public boolean contains(double x, double y) {
         double width = getWidth();
         double height = getHeight();
@@ -135,5 +125,10 @@ public class MyImage implements Drawable {
     @Override
     public void select(boolean select) {
         selected = select;
+    }
+    
+    @Override
+    public void setString(String string) {
+        
     }
 }
