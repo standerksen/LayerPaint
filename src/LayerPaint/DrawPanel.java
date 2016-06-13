@@ -34,6 +34,10 @@ public final class DrawPanel extends JPanel {
     }
     
     public void setFillColor(Color color){
+        if(selected instanceof Fillable){
+            ((Fillable) selected).setColor(color);
+            repaint();
+        }
         fillColor = color;
     }
     
@@ -42,6 +46,10 @@ public final class DrawPanel extends JPanel {
     }
     
     public void setStrokeColor(Color color){
+        if(selected instanceof Strokeable){
+            ((Strokeable) selected).setStrokeColor(color);
+            repaint();
+        }
         strokeColor = color;
     }
     
@@ -51,6 +59,10 @@ public final class DrawPanel extends JPanel {
     
     public void setStroke(int s) {
         stroke = new BasicStroke((float) s, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+        if(selected instanceof Strokeable){
+            ((Strokeable) selected).setStroke(stroke);
+            repaint();
+        }
     }
     
     public void setTool(ToolName tool){
@@ -116,25 +128,21 @@ public final class DrawPanel extends JPanel {
     }
     
     public void click(int x, int y){
+        shapesList.stream().forEach((s) -> {
+            s.select(false);
+        });
+        selected = null;
         if(tool == ToolName.DELETE){
             int shape = shapeAtClick(x, y);
             if(shape > -1){
                 shapesList.remove(shape);
             }
         } else if (tool == ToolName.MOVE){
-            shapesList.stream().forEach((s) -> {
-                s.select(false);
-                selected = null;
-            });
             if(shapeAtClick(x, y) >= 0){
                 shapesList.get(shapeAtClick(x, y)).select(true);
                 selected = shapesList.get(shapeAtClick(x, y));
             }
         } else if(tool == ToolName.TEXT){
-            shapesList.stream().forEach((s) -> {
-                s.select(false);
-                selected = null;
-            });
             shapesList.add(new MyText(x,y, fillColor));
             shapesList.get(shapesList.size() - 1).select(true);
             selected = shapesList.get(shapesList.size() - 1);
@@ -305,25 +313,28 @@ public final class DrawPanel extends JPanel {
         lasty = -1;
     }
     
+    public void delete(){
+        if(selected instanceof Drawable){
+            shapesList.remove(selected);
+            repaint();
+        }
+    }
+    
     public void backspace(){
-        System.out.println("BS");
         if(selected instanceof MyText){
-            MyText textSelected = (MyText) selected;
-            String str = textSelected.getString();
+            String str = ((MyText) selected).getString();
             if (str != null && str.length() > 0) {
                 str = str.substring(0, str.length()-1);
             }
-            selected.setString(str);
+            ((MyText) selected).setString(str);
             
             repaint();
         }
     }
 
     public void type(char keyChar) {
-        System.out.println(keyChar);
         if(selected instanceof MyText){
-            MyText textSelected = (MyText) selected;
-            selected.setString(textSelected.getString() + keyChar);
+            ((MyText) selected).setString(((MyText) selected).getString() + keyChar);
             
             repaint();
         }

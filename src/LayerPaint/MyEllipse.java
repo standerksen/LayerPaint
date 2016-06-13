@@ -2,37 +2,37 @@ package LayerPaint;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
+import java.awt.BasicStroke;
 import java.awt.geom.Ellipse2D;
 
 public class MyEllipse implements Drawable, Fillable, Strokeable {
-        
+
     public boolean selected = false;
     public SelectBox s;
     private double x1, y1, x2, y2;
     private Color color = Color.CYAN;
-    private Stroke stroke;
+    private BasicStroke stroke;
     private Color strokeColor = Color.RED;
 
     public MyEllipse() {
     }
 
-    public MyEllipse(double x1, double y1, double x2, double y2, Stroke stroke, Color color, Color strokeColor) {
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
-            this.stroke = stroke;
-            this.color = color;
-            this.strokeColor = strokeColor;
+    public MyEllipse(double x1, double y1, double x2, double y2, BasicStroke stroke, Color color, Color strokeColor) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+        this.stroke = stroke;
+        this.color = color;
+        this.strokeColor = strokeColor;
     }
 
     @Override
-    public Stroke stroke(){
+    public BasicStroke stroke() {
         return stroke;
     }
 
-    public MyEllipse(Tuple4d location){
+    public MyEllipse(Tuple4d location) {
         x1 = location.x;
         y1 = location.y;
         x2 = location.z;
@@ -40,49 +40,44 @@ public class MyEllipse implements Drawable, Fillable, Strokeable {
     }
 
     @Override
-    public boolean equals(Object other){
-        return other instanceof MyEllipse;
-    }
-
-    @Override
-    public SelectBox getBox(){
+    public SelectBox getBox() {
         return s;
     }
 
     @Override
     public void draw(Graphics2D g) {
-            double x = getStartX();
-            double y = getStartY();
-            double width = getWidth();
-            double height = getHeight();
-            Ellipse2D r = new Ellipse2D.Double(x, y, width, height);
+        double x = getStartX();
+        double y = getStartY();
+        double width = getWidth();
+        double height = getHeight();
+        Ellipse2D r = new Ellipse2D.Double(x, y, width, height);
 
-            g.setStroke(stroke);
-            g.setPaint(color);
-            g.fill(r);
-            g.setColor(strokeColor);
-            g.draw(r);
-            g.setColor(Color.BLACK);
-            if(selected){
-                s = new SelectBox(x, y, width, height);
-                s.draw(g);
-            }
+        g.setStroke(stroke);
+        g.setPaint(color);
+        g.fill(r);
+        g.setColor(strokeColor);
+        g.draw(r);
+        g.setColor(Color.BLACK);
+        if (selected) {
+            s = new SelectBox(x, y, width, height);
+            s.draw(g);
+        }
     }
 
     private double getWidth() {
-            return Math.abs(x1 - x2);
+        return Math.abs(x1 - x2);
     }
 
     private double getHeight() {
-            return Math.abs(y1 - y2);
+        return Math.abs(y1 - y2);
     }
 
     private double getStartX() {
-            return Math.min(x1, x2);
+        return Math.min(x1, x2);
     }
 
     private double getStartY() {
-            return Math.min(y1, y2);
+        return Math.min(y1, y2);
     }
 
     @Override
@@ -91,7 +86,7 @@ public class MyEllipse implements Drawable, Fillable, Strokeable {
     }
 
     @Override
-    public void setCoords( Tuple4d tuple ){
+    public void setCoords(Tuple4d tuple) {
         x1 = tuple.x;
         y1 = tuple.y;
         x2 = tuple.z;
@@ -99,11 +94,11 @@ public class MyEllipse implements Drawable, Fillable, Strokeable {
     }
 
     @Override
-    public void setColor(Color c){
+    public void setColor(Color c) {
         this.color = c;
     }
 
-    public Color getColor(){
+    public Color getColor() {
         return color;
     }
 
@@ -119,16 +114,15 @@ public class MyEllipse implements Drawable, Fillable, Strokeable {
         Ellipse2D r = new Ellipse2D.Double(getStartX(), getStartY(), width, height);
         return r.contains(x, y);
     }
-    
+
     @Override
     public void select(boolean select) {
         selected = select;
     }
 
     @Override
-    public void setString(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setStroke(BasicStroke s) {
+        stroke = s;
     }
 
-    
 }

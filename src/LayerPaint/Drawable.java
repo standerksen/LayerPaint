@@ -18,5 +18,4 @@ public interface Drawable {
 
     public void setCoords( Tuple4d tuple);
 
-    public void setString( String string);
 }

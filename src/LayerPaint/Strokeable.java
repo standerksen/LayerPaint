@@ -5,6 +5,7 @@
  */
 package LayerPaint;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 
@@ -14,8 +15,10 @@ import java.awt.Stroke;
  */
 interface Strokeable {
     
-    public Stroke stroke();
+    public BasicStroke stroke();
     
     public void setStrokeColor(Color c);
+    
+    public void setStroke(BasicStroke s);
     
 }

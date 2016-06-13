@@ -66,11 +66,6 @@ public class MyImage implements Drawable {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other instanceof MyImage;
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 41 * hash + (int) (Double.doubleToLongBits(this.x1) ^ (Double.doubleToLongBits(this.x1) >>> 32));
@@ -127,8 +122,4 @@ public class MyImage implements Drawable {
         selected = select;
     }
     
-    @Override
-    public void setString(String string) {
-        
-    }
 }

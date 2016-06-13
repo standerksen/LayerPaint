@@ -122,13 +122,15 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
             backspace = true;
-        }
+        } 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
             backspace = false;
+        } else if(e.getKeyCode() == KeyEvent.VK_DELETE){
+            drawPanel.delete();
         }
     }
 }

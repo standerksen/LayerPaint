@@ -1,8 +1,8 @@
 package LayerPaint;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 
@@ -14,12 +14,12 @@ public class MyLine implements Drawable, Strokeable {
     public SelectBox s;
     private double x1, y1, x2, y2;
     private Color color = Color.BLACK;
-    private Stroke stroke;
+    private BasicStroke stroke;
     
     public MyLine() {
     }
 
-    public MyLine(double x1, double y1, double x2, double y2, Stroke stroke, Color color) {
+    public MyLine(double x1, double y1, double x2, double y2, BasicStroke stroke, Color color) {
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
@@ -36,25 +36,22 @@ public class MyLine implements Drawable, Strokeable {
     }
     
     @Override
-    public Stroke stroke(){
+    public BasicStroke stroke(){
         return stroke;
-    }
-    
-    @Override
-    public boolean equals(Object other){
-        return other instanceof MyLine;
     }
 
     @Override
     public void draw(Graphics2D g) {
             Line2D r = new Line2D.Double(x1, y1, x2, y2);
             g.setStroke(stroke);
+            g.setColor(color);
             g.draw(r);
             if(selected){
                 s.draw(g);
             }
     }
 
+    @Override
     public Tuple4d getCoords() {
         return new Tuple4d(x1, y1, x2, y2);
     }
@@ -96,9 +93,9 @@ public class MyLine implements Drawable, Strokeable {
     public void select(boolean select) {
         selected = select;
     }
-
+    
     @Override
-    public void setString(String string) {
-        
+    public void setStroke(BasicStroke s) {
+        stroke = s;
     }
 }
