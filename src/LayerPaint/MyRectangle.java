@@ -11,77 +11,80 @@ public class MyRectangle implements Drawable, Fillable {
     public SelectBox s;
     private double x1, y1, x2, y2;
     private Stroke stroke;
-    private Color color = null;
+    private Color strokeColor;
+    private Color color;
 
-	public MyRectangle() {
-	}
+    public MyRectangle() {
+    }
 
-	public MyRectangle(double x1, double y1, double x2, double y2, Stroke stroke, Color color) {
-		this.x1 = x1;
-		this.y1 = y1;
-		this.x2 = x2;
-		this.y2 = y2;
-                this.stroke = stroke;
-                this.color = color;
-	}
-        
-        public MyRectangle(Tuple4d location){
-            x1 = location.x;
-            y1 = location.y;
-            x2 = location.z;
-            y2 = location.w;
-        }
-        
-        public Stroke stroke(){
-            return stroke;
-        }
+    public MyRectangle(double x1, double y1, double x2, double y2, Stroke stroke, Color color, Color strokeColor) {
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+            this.stroke = stroke;
+            this.color = color;
+            this.strokeColor = strokeColor;
+    }
+
+    public MyRectangle(Tuple4d location){
+        x1 = location.x;
+        y1 = location.y;
+        x2 = location.z;
+        y2 = location.w;
+    }
+
+    public Stroke stroke(){
+        return stroke;
+    }
         
     @Override
-        public SelectBox getBox(){
-            return s;
+    public SelectBox getBox(){
+        return s;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        return other instanceof MyRectangle;
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        double x = getStartX();
+        double y = getStartY();
+        double width = getWidth();
+        double height = getHeight();
+        Rectangle2D r = new Rectangle2D.Double(x, y, width, height);
+        g.setStroke(stroke);
+        g.setPaint(color);
+        g.fill(r);
+        g.setColor(strokeColor);
+        g.draw(r);
+        g.setColor(Color.BLACK);
+        if(selected){
+            s.draw(g);
         }
-        
-        @Override
-        public boolean equals(Object other){
-            return other instanceof MyRectangle;
-        }
+    }
 
-	@Override
-	public void draw(Graphics2D g) {
-            double x = getStartX();
-            double y = getStartY();
-            double width = getWidth();
-            double height = getHeight();
-            Rectangle2D r = new Rectangle2D.Double(x, y, width, height);
-            g.setStroke(stroke);
-            g.draw(r);
-            g.setColor(color);
-            g.fill(r);
-            g.setColor(Color.BLACK);
-            if(selected){
-                s.draw(g);
-            }
-	}
+    private double getWidth() {
+            return Math.abs(x1 - x2);
+    }
 
-	private double getWidth() {
-		return Math.abs(x1 - x2);
-	}
+    private double getHeight() {
+            return Math.abs(y1 - y2);
+    }
 
-	private double getHeight() {
-		return Math.abs(y1 - y2);
-	}
+    private double getStartX() {
+            return Math.min(x1, x2);
+    }
 
-	private double getStartX() {
-		return Math.min(x1, x2);
-	}
+    private double getStartY() {
+            return Math.min(y1, y2);
+    }
 
-	private double getStartY() {
-		return Math.min(y1, y2);
-	}
-        
-        public Tuple4d getCoords() {
-            return new Tuple4d(x1, y1, x2, y2);
-        }
+    public Tuple4d getCoords() {
+        return new Tuple4d(x1, y1, x2, y2);
+    }
         
     @Override
     public void setCoords(Tuple4d tuple){
@@ -92,8 +95,12 @@ public class MyRectangle implements Drawable, Fillable {
         s = new SelectBox(getStartX()-1, getStartY()-1, getWidth()+2, getHeight()+2);
     }
 
-    public void setColor(Color color){
-        this.color = color;
+    public void setColor(Color c){
+        color = c;
+    }
+    
+    public void setStrokeColor(Color c){
+        
     }
 
     @Override

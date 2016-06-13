@@ -13,30 +13,33 @@ public class MyLine implements Drawable {
     public boolean selected = false;
     public SelectBox s;
     private double x1, y1, x2, y2;
-    private Color color = null;
+    private Color color = Color.BLACK;
     private Stroke stroke;
     
     public MyLine() {
     }
 
-    public MyLine(double x1, double y1, double x2, double y2, Stroke stroke) {
+    public MyLine(double x1, double y1, double x2, double y2, Stroke stroke, Color color) {
             this.x1 = x1;
             this.y1 = y1;
             this.x2 = x2;
             this.y2 = y2;
             this.stroke = stroke;
+            this.color = color;
     }
     
-    public Stroke stroke(){
-        return stroke;
-    }
-
     public MyLine(Tuple4d location){
         x1 = location.x;
         y1 = location.y;
         x2 = location.z;
         y2 = location.w;
     }
+    
+    @Override
+    public Stroke stroke(){
+        return stroke;
+    }
+    
     @Override
     public boolean equals(Object other){
         return other instanceof MyLine;
@@ -56,10 +59,12 @@ public class MyLine implements Drawable {
         return new Tuple4d(x1, y1, x2, y2);
     }
     
+    @Override
     public SelectBox getBox(){
-            return s;
-        }
+        return s;
+    }
     
+    @Override
     public void setCoords( Tuple4d tuple){
         x1 = tuple.x;
         y1 = tuple.y;
@@ -68,8 +73,9 @@ public class MyLine implements Drawable {
         s = new SelectBox(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2-x1), Math.abs(y2-y1));
     }
     
-    public void setColor(Color color){
-        this.color = color;
+    @Override
+    public void setStrokeColor(Color c){
+        color = c;
     }
     
     

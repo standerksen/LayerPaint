@@ -6,26 +6,21 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.JPanel;
 
 public final class DrawPanel extends JPanel {
 
     private ToolName tool = ToolName.RECTANGLE;
     private final ArrayList<Drawable> shapesList;
-    private final Random rnd;
     private int startx, starty, lastx, lasty, movePoint;
     private Drawable selected;
-    private BasicStroke stroke;
-    private Color fillColor = new Color(0,0,0, 0);
-    private Drawable moveShape;
+    private BasicStroke stroke = new BasicStroke((float) 1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+    private Color fillColor = Color.WHITE, strokeColor = Color.BLACK;
     
     public DrawPanel() {
         super();
         this.setBackground(Color.WHITE);
-        this.rnd = new Random();
         this.shapesList = new ArrayList<>();
-        this.setStroke(1);
     }
     
     @Override
@@ -38,7 +33,19 @@ public final class DrawPanel extends JPanel {
     }
     
     public void setFillColor(Color color){
-        this.fillColor = color;
+        fillColor = color;
+    }
+    
+    public Color getFillColor(){
+        return fillColor;
+    }
+    
+    public void setStrokeColor(Color color){
+        strokeColor = color;
+    }
+    
+    public Color getStrokeColor(){
+        return strokeColor;
     }
     
     public void setStroke(int s) {
@@ -243,13 +250,13 @@ public final class DrawPanel extends JPanel {
                 tool == ToolName.LINE || tool == ToolName.IMAGE){
             switch(tool){
                 case RECTANGLE:
-                    shape = new MyRectangle(x, y, x, y, stroke, fillColor);
+                    shape = new MyRectangle(x, y, x, y, stroke, fillColor, strokeColor);
                     break;
                 case ELLIPSE:
-                    shape = new MyEllipse(x, y, x, y, stroke, fillColor);
+                    shape = new MyEllipse(x, y, x, y, stroke, fillColor, strokeColor);
                     break;
                 case LINE:
-                    shape = new MyLine(x, y, x, y, stroke);
+                    shape = new MyLine(x, y, x, y, stroke, strokeColor);
                     break;
                 case IMAGE:
                     shape = new MyImage(x, y, x, y);

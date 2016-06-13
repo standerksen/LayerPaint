@@ -12,10 +12,12 @@ import javax.swing.event.ChangeListener;
 public class InputHandler implements ActionListener, ChangeListener, MouseListener, MouseMotionListener {
     private final DrawPanel drawPanel;
     private final SidebarPanel sidebarPanel;
+    private final PreviewPanel previewPanel;
     
-    public InputHandler(DrawPanel drawPanel, SidebarPanel sidebarPanel) {
+    public InputHandler(DrawPanel drawPanel, PreviewPanel previewPanel, SidebarPanel sidebarPanel) {
         this.drawPanel = drawPanel;
         this.sidebarPanel = sidebarPanel;
+        this.previewPanel = previewPanel;
     }
     
     @Override
@@ -85,5 +87,6 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
     public void stateChanged(ChangeEvent e) {
         JSlider source = (JSlider)e.getSource();
         drawPanel.setStroke(source.getValue());
+        previewPanel.setStroke(source.getValue());
     }
 }

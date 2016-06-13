@@ -5,10 +5,14 @@
  */
 package LayerPaint;
 
+import java.awt.Color;
+
 /**
  *
  * @author pieter
  */
 interface Fillable {
+    public void setColor(Color c);
+    
     
 }

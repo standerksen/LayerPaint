@@ -1,9 +1,7 @@
 package LayerPaint;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.Stroke;
 
 public interface Drawable {
@@ -16,9 +14,9 @@ public interface Drawable {
         
         public Stroke stroke();
         
-        public Tuple4d getCoords();
-
-        public void setColor(Color color);
+        public Tuple4d getCoords();;
+        
+        public void setStrokeColor(Color c);
         
         public boolean contains(double x, double y);
         

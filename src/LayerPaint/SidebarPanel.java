@@ -1,17 +1,24 @@
 package LayerPaint;
 
+import LayerPaint.ColorChanger.mode;
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 public class SidebarPanel extends JToolBar {
+
     static final int MIN_STROKE = 1;
     static final int MAX_STROKE = 10;
     static final int INIT_STROKE = 1;
 
     private JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton;
     private JSlider strokeSlider;
+    public JColorChooser fillColorChooser, strokeColorChooser;
+    private final PreviewPanel previewPanel;
 
     public SidebarPanel(DrawPanel drawPanel) {
+        AbstractColorChooserPanel[] tabs;
+        
         this.setOrientation(JToolBar.VERTICAL);
 
         ImageIcon move = new ImageIcon(getClass().getResource("resources/ic_move.png"));
@@ -38,6 +45,29 @@ public class SidebarPanel extends JToolBar {
         strokeSlider.setPaintTicks(true);
         strokeSlider.setPaintLabels(true);
 
+        fillColorChooser = new JColorChooser(drawPanel.getFillColor());
+        strokeColorChooser = new JColorChooser(drawPanel.getStrokeColor());
+        
+        previewPanel = new PreviewPanel(fillColorChooser, strokeColorChooser);
+        fillColorChooser.setPreviewPanel(new JPanel());
+        strokeColorChooser.setPreviewPanel(previewPanel);
+        
+        tabs = fillColorChooser.getChooserPanels();
+        for (AbstractColorChooserPanel tab : tabs) {
+            String name = tab.getClass().getSimpleName();
+            if (!"DefaultSwatchChooserPanel".equals(name)) {
+                fillColorChooser.removeChooserPanel(tab);
+            }
+        }
+        
+        tabs = strokeColorChooser.getChooserPanels();
+        for (AbstractColorChooserPanel tab : tabs) {
+            String name = tab.getClass().getSimpleName();
+            if (!"DefaultSwatchChooserPanel".equals(name)) {
+                strokeColorChooser.removeChooserPanel(tab);
+            }
+        }
+
         JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton};
 
 //        delShapeButton.addActionListener(new InputHandler(drawPanel, this));
@@ -45,16 +75,19 @@ public class SidebarPanel extends JToolBar {
 //        rectShapeButton.addActionListener(new InputHandler(drawPanel, this));
 //        elliShapeButton.addActionListener(new InputHandler(drawPanel, this));
 //        lineShapeButton.addActionListener(new InputHandler(drawPanel, this));
+        strokeSlider.addChangeListener(new InputHandler(drawPanel, previewPanel, this));
+        fillColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, fillColorChooser, mode.FILL));
+        strokeColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, strokeColorChooser, mode.STROKE));
+        drawPanel.addMouseListener(new InputHandler(drawPanel, previewPanel, this));
+        drawPanel.addMouseMotionListener(new InputHandler(drawPanel, previewPanel, this));
 
-        strokeSlider.addChangeListener(new InputHandler(drawPanel, this));
-        drawPanel.addMouseListener(new InputHandler(drawPanel, this));
-        drawPanel.addMouseMotionListener(new InputHandler(drawPanel, this));
-
-        for(JButton button : jButtonArray) {
-            button.addActionListener(new InputHandler(drawPanel, this));
+        for (JButton button : jButtonArray) {
+            button.addActionListener(new InputHandler(drawPanel, previewPanel, this));
             add(button);
         }
 
         add(strokeSlider);
+        add(fillColorChooser);
+        add(strokeColorChooser);
     }
 }
