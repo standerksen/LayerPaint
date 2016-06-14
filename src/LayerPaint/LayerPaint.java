@@ -13,18 +13,9 @@ public class LayerPaint {
         UIManager.setLookAndFeel(
             UIManager.getSystemLookAndFeelClassName());
         } 
-        catch (UnsupportedLookAndFeelException e) {
-           // handle exception
+        catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+           System.out.println("Failed to load LAF");
         }
-        catch (ClassNotFoundException e) {
-           // handle exception
-        }
-        catch (InstantiationException e) {
-           // handle exception
-        }
-        catch (IllegalAccessException e) {
-           // handle exception
-    }
         
         SwingUtilities.invokeLater(() -> {
             Window window = new Window();
