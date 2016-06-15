@@ -25,13 +25,14 @@ public class SidebarPanel extends JToolBar {
         ImageIcon rectangle = new ImageIcon(getClass().getResource("resources/ic_rectangle.png"));
         ImageIcon ellipse = new ImageIcon(getClass().getResource("resources/ic_ellipse.png"));
         ImageIcon line = new ImageIcon(getClass().getResource("resources/ic_line.png"));
+        ImageIcon text = new ImageIcon(getClass().getResource("resources/ic_text.png"));
 
         movShapeButton = new JButton(move);
         delShapeButton = new JButton(delete);
         rectShapeButton = new JButton(rectangle);
         elliShapeButton = new JButton(ellipse);
         lineShapeButton = new JButton(line);
-        textButton = new JButton("Text");
+        textButton = new JButton(text);
 
         movShapeButton.setActionCommand("Move");
         delShapeButton.setActionCommand("Delete");
