@@ -2,10 +2,7 @@ package LayerPaint;
 
 import LayerPaint.ColorChanger.mode;
 import javax.swing.*;
-<<<<<<< HEAD
-=======
 import javax.swing.colorchooser.AbstractColorChooserPanel;
->>>>>>> 2d2398dc5d589bd726152c23598b4b0ef092a083
 
 public class SidebarPanel extends JToolBar {
 
