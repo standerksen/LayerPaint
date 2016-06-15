@@ -1,7 +1,6 @@
 package LayerPaint;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class SidebarPanel extends JToolBar {
     static final int MIN_STROKE = 1;
@@ -39,12 +38,6 @@ public class SidebarPanel extends JToolBar {
         strokeSlider.setPaintLabels(true);
 
         JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton};
-
-//        delShapeButton.addActionListener(new InputHandler(drawPanel, this));
-//        movShapeButton.addActionListener(new InputHandler(drawPanel, this));
-//        rectShapeButton.addActionListener(new InputHandler(drawPanel, this));
-//        elliShapeButton.addActionListener(new InputHandler(drawPanel, this));
-//        lineShapeButton.addActionListener(new InputHandler(drawPanel, this));
 
         strokeSlider.addChangeListener(new InputHandler(drawPanel, this));
         drawPanel.addMouseListener(new InputHandler(drawPanel, this));
