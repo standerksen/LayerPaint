@@ -1,16 +1,26 @@
 package LayerPaint;
 
+import LayerPaint.ColorChanger.mode;
 import javax.swing.*;
+<<<<<<< HEAD
+=======
+import javax.swing.colorchooser.AbstractColorChooserPanel;
+>>>>>>> 2d2398dc5d589bd726152c23598b4b0ef092a083
 
 public class SidebarPanel extends JToolBar {
+
     static final int MIN_STROKE = 1;
     static final int MAX_STROKE = 10;
     static final int INIT_STROKE = 1;
 
-    private JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton;
-    private JSlider strokeSlider;
+    private final JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton, textButton;
+    private final JSlider strokeSlider;
+    public JColorChooser fillColorChooser, strokeColorChooser;
+    private final PreviewPanel previewPanel;
 
     public SidebarPanel(DrawPanel drawPanel) {
+        AbstractColorChooserPanel[] tabs;
+
         this.setOrientation(JToolBar.VERTICAL);
 
         ImageIcon move = new ImageIcon(getClass().getResource("resources/ic_move.png"));
@@ -24,12 +34,14 @@ public class SidebarPanel extends JToolBar {
         rectShapeButton = new JButton(rectangle);
         elliShapeButton = new JButton(ellipse);
         lineShapeButton = new JButton(line);
+        textButton = new JButton("Text");
 
         movShapeButton.setActionCommand("Move");
         delShapeButton.setActionCommand("Delete");
         rectShapeButton.setActionCommand("Rectangle");
         elliShapeButton.setActionCommand("Ellipse");
         lineShapeButton.setActionCommand("Line");
+        textButton.setActionCommand("Text");
 
         strokeSlider = new JSlider(JSlider.HORIZONTAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
         strokeSlider.setMajorTickSpacing(2);
@@ -37,17 +49,49 @@ public class SidebarPanel extends JToolBar {
         strokeSlider.setPaintTicks(true);
         strokeSlider.setPaintLabels(true);
 
-        JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton};
+        fillColorChooser = new JColorChooser(drawPanel.getFillColor());
+        strokeColorChooser = new JColorChooser(drawPanel.getStrokeColor());
 
-        strokeSlider.addChangeListener(new InputHandler(drawPanel, this));
-        drawPanel.addMouseListener(new InputHandler(drawPanel, this));
-        drawPanel.addMouseMotionListener(new InputHandler(drawPanel, this));
+        previewPanel = new PreviewPanel(fillColorChooser, strokeColorChooser);
+        fillColorChooser.setPreviewPanel(new JPanel());
+        strokeColorChooser.setPreviewPanel(previewPanel);
 
-        for(JButton button : jButtonArray) {
-            button.addActionListener(new InputHandler(drawPanel, this));
+        tabs = fillColorChooser.getChooserPanels();
+        for (AbstractColorChooserPanel tab : tabs) {
+            String name = tab.getClass().getSimpleName();
+            if (!"DefaultSwatchChooserPanel".equals(name)) {
+                fillColorChooser.removeChooserPanel(tab);
+            }
+        }
+
+        tabs = strokeColorChooser.getChooserPanels();
+        for (AbstractColorChooserPanel tab : tabs) {
+            String name = tab.getClass().getSimpleName();
+            if (!"DefaultSwatchChooserPanel".equals(name)) {
+                strokeColorChooser.removeChooserPanel(tab);
+            }
+        }
+
+        JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton};
+
+//        delShapeButton.addActionListener(new InputHandler(drawPanel, this));
+//        movShapeButton.addActionListener(new InputHandler(drawPanel, this));
+//        rectShapeButton.addActionListener(new InputHandler(drawPanel, this));
+//        elliShapeButton.addActionListener(new InputHandler(drawPanel, this));
+//        lineShapeButton.addActionListener(new InputHandler(drawPanel, this));
+        strokeSlider.addChangeListener(new InputHandler(drawPanel, previewPanel));
+        fillColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, fillColorChooser, mode.FILL));
+        strokeColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, strokeColorChooser, mode.STROKE));
+        drawPanel.addMouseListener(new InputHandler(drawPanel, previewPanel));
+        drawPanel.addMouseMotionListener(new InputHandler(drawPanel, previewPanel));
+
+        for (JButton button : jButtonArray) {
+            button.addActionListener(new InputHandler(drawPanel, previewPanel));
             add(button);
         }
 
         add(strokeSlider);
+        add(fillColorChooser);
+        add(strokeColorChooser);
     }
 }
