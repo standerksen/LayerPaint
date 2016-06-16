@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  */
 public class MyImage implements Drawable {
 
-    private static final String IMG_PATH = "src/resources/black.png";
+    private static final String IMG_PATH = "resources/black.png";
 
     public boolean selected;
     public SelectBox s;

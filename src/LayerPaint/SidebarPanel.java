@@ -46,7 +46,7 @@ public class SidebarPanel extends JToolBar {
         elliShapeButton.setActionCommand("Ellipse");
         lineShapeButton.setActionCommand("Line");
         textButton.setActionCommand("Text");
-        fileButton.setActionCommand("File");
+        fileButton.setActionCommand("Image");
 
         strokeSlider = new JSlider(JSlider.VERTICAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
         strokeSlider.setMajorTickSpacing(2);
