@@ -1,6 +1,8 @@
 package LayerPaint;
 
 import LayerPaint.ColorChanger.mode;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Hashtable;
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
@@ -72,7 +74,9 @@ public class SidebarPanel extends JToolBar {
             fillColorChooser.removeChooserPanel(tab);
         }
         fillColorChooser.addChooserPanel(new ColorPanel());
-
+        fillColorChooser.setBorder(BorderFactory.createLineBorder(Color.black));
+        fillColorChooser.setMaximumSize(new Dimension(50,100));
+        fillColorChooser.setSize(new Dimension(50,100));
         tabs = strokeColorChooser.getChooserPanels();
         for (AbstractColorChooserPanel tab : tabs) {
             String name = tab.getClass().getSimpleName();
@@ -98,9 +102,10 @@ public class SidebarPanel extends JToolBar {
             button.addActionListener(new InputHandler(drawPanel, previewPanel));
             add(button);
         }
-
-        add(strokeSlider);
+        
         add(fillColorChooser);
-        add(strokeColorChooser);
+        //add(strokeColorChooser);
+        //add(strokeSlider);
+        
     }
 }

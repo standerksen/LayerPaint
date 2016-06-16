@@ -6,6 +6,7 @@
 package LayerPaint;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,9 +33,10 @@ public class ColorPanel extends AbstractColorChooserPanel implements ActionListe
 
     @Override
     protected void buildChooser() {
-        setLayout(new GridLayout(2, 0));
-        Border border = BorderFactory.createEmptyBorder(6,6,6,6);
+        setLayout(new FlowLayout(FlowLayout.TRAILING));
+        Border border = BorderFactory.createEmptyBorder(11,11,11,11);
         ButtonGroup colorButtons = new ButtonGroup();
+        
         
         List<ColorName> colors = new ArrayList<>();
         colors.add(new ColorName("Red", Color.RED));
@@ -56,12 +58,12 @@ public class ColorPanel extends AbstractColorChooserPanel implements ActionListe
 
     @Override
     public Icon getSmallDisplayIcon() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public Icon getLargeDisplayIcon() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
