@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  */
 public class MyImage implements Drawable {
 
-    private static final String IMG_PATH = "src/LayerPaint/resources/black.png";
+    private static final String IMG_PATH = "src/LayerPaint/resources/eiffel.png";
 
     public boolean selected;
     public SelectBox s;
@@ -40,6 +40,7 @@ public class MyImage implements Drawable {
 
     private void loadImage() {
         try {
+            ClassLoader classLoader = getClass().getClassLoader();
             image = ImageIO.read(new File(IMG_PATH));
         } catch (IOException ex) {
             Logger.getLogger(MyImage.class.getName() + ": Could not Load Image").log(Level.SEVERE, null, ex);
