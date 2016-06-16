@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f89a4ee-8f86-4c6c-9130-b1023d2b459c" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyImage.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/black.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/resources/black.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/InputHandler.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/InputHandler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyImage.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyImage.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyRectangle.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyRectangle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/SidebarPanel.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/SidebarPanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_delete.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_delete.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_ellipse.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_ellipse.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_file.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_file.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_line.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_line.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_move.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_move.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_rectangle.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_rectangle.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/resources/ic_text.png" afterPath="$PROJECT_DIR$/src/LayerPaint/resources/ic_text.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/MyImage.java" afterPath="$PROJECT_DIR$/src/LayerPaint/MyImage.java" />
     </list>
     <ignored path="LayerPaint.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,7 +52,7 @@
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="49" />
+              <caret line="31" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,9 +63,11 @@
       <file leaf-file-name="MyImage.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/MyImage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
-              <folding />
+            <state relative-caret-position="810">
+              <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -831,12 +843,12 @@
       <updated>1465562283243</updated>
       <workItem from="1465562284792" duration="12395000" />
       <workItem from="1466006920332" duration="1059000" />
-      <workItem from="1466083947397" duration="3916000" />
+      <workItem from="1466083947397" duration="5273000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17370000" />
+    <option name="totallyTimeSpent" value="18727000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="24" width="1871" height="1056" extended-state="6" />
@@ -850,11 +862,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24959914" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -997,7 +1009,7 @@
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="49" />
+          <caret line="31" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1038,9 +1050,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/MyImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
-          <folding />
+        <state relative-caret-position="810">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
