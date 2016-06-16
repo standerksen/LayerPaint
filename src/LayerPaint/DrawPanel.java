@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JPanel;
 
 public final class DrawPanel extends JPanel {
@@ -69,11 +70,13 @@ public final class DrawPanel extends JPanel {
     }
 
     public void setTool(ToolName tool) {
-        shapesList.stream().forEach((s) -> {
-            s.select(false);
-        });
-        selected = null;
-        repaint();
+        if(tool != ToolName.MOVE){
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+            });
+            selected = null;
+            repaint();
+        }
         this.tool = tool;
     }
 
@@ -152,8 +155,6 @@ public final class DrawPanel extends JPanel {
                     if (shapeAtClick(x, y) >= 0) {
                         shapesList.get(shapeAtClick(x, y)).select(true);
                         selected = shapesList.get(shapeAtClick(x, y));
-                        shapesList.remove(selected);
-                        shapesList.add(selected);
                         repaint();
                     }
                     break;
@@ -290,6 +291,7 @@ public final class DrawPanel extends JPanel {
             shapesList.stream().forEach((s) -> {
                 s.select(false);
             });
+            selected = null;
         }
 
         if (tool == ToolName.RECTANGLE || tool == ToolName.ELLIPSE
@@ -297,7 +299,7 @@ public final class DrawPanel extends JPanel {
             switch (tool) {
                 case RECTANGLE:
                     shape = new MyRectangle(x, y, x, y, stroke, fillColor, strokeColor);
-                    
+
                     break;
                 case ELLIPSE:
                     shape = new MyEllipse(x, y, x, y, stroke, fillColor, strokeColor);
@@ -329,7 +331,12 @@ public final class DrawPanel extends JPanel {
                 shapesList.remove(shapesList.size() - 1);
             }
         }
-
+        if(tool == ToolName.ELLIPSE || tool == ToolName.IMAGE || tool == ToolName.RECTANGLE || tool == ToolName.LINE){
+            setTool(ToolName.MOVE);
+            shapesList.get(shapesList.size() - 1).select(true);
+            selected = shapesList.get(shapesList.size() - 1);
+            repaint();
+        }
         lastx = -1;
         lasty = -1;
     }
@@ -337,6 +344,7 @@ public final class DrawPanel extends JPanel {
     public void delete() {
         if (selected instanceof Drawable) {
             shapesList.remove(selected);
+            selected = null;
             repaint();
         }
     }
@@ -357,6 +365,24 @@ public final class DrawPanel extends JPanel {
         if (selected instanceof MyText) {
             ((MyText) selected).setString(((MyText) selected).getString() + keyChar);
 
+            repaint();
+        }
+    }
+
+    public void pageUp() {
+        if (selected instanceof Drawable) {
+            if (shapesList.indexOf(selected) < (shapesList.size() - 1)) {
+                Collections.swap(shapesList, shapesList.indexOf(selected), shapesList.indexOf(selected) + 1);
+            }
+            repaint();
+        }
+    }
+
+    public void pageDown() {
+        if (selected instanceof Drawable) {
+            if (shapesList.indexOf(selected) > 0) {
+                Collections.swap(shapesList, shapesList.indexOf(selected), shapesList.indexOf(selected) - 1);
+            }
             repaint();
         }
     }

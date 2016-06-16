@@ -19,9 +19,11 @@ public class Window extends JFrame {
         dp.addKeyListener(new InputHandler(dp));
 
         JToolBar sb = new SidebarPanel(dp);
+        JToolBar csb = new ColorSidebarPanel(dp);
 
         getContentPane().add(dp, BorderLayout.CENTER);
         getContentPane().add(sb, BorderLayout.WEST);
+        getContentPane().add(csb, BorderLayout.EAST);
 
         setVisible(true);
     }

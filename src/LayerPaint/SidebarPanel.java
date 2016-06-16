@@ -1,44 +1,44 @@
 package LayerPaint;
 
-import LayerPaint.ColorChanger.mode;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.util.Hashtable;
 import javax.swing.*;
-import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 public class SidebarPanel extends JToolBar {
 
-    static final int MIN_STROKE = 1;
-    static final int MAX_STROKE = 10;
-    static final int INIT_STROKE = 1;
-
-    private final JButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton, textButton, fileButton;
-    private final JSlider strokeSlider;
-    public JColorChooser fillColorChooser, strokeColorChooser;
-    private final PreviewPanel previewPanel;
+    private final JToggleButton movShapeButton, delShapeButton, rectShapeButton, elliShapeButton, lineShapeButton, textButton, fileButton;
 
     public SidebarPanel(DrawPanel drawPanel) {
-        AbstractColorChooserPanel[] tabs;
-        Hashtable labelTable;
 
         this.setOrientation(JToolBar.VERTICAL);
 
         ImageIcon move = new ImageIcon(getClass().getResource("resources/ic_move.png"));
+        ImageIcon moveSelected = new ImageIcon(getClass().getResource("resources/ic_move_selected.png"));
         ImageIcon delete = new ImageIcon(getClass().getResource("resources/ic_delete.png"));
+        ImageIcon deleteSelected = new ImageIcon(getClass().getResource("resources/ic_delete_selected.png"));
         ImageIcon rectangle = new ImageIcon(getClass().getResource("resources/ic_rectangle.png"));
+        ImageIcon rectangleSelected = new ImageIcon(getClass().getResource("resources/ic_rectangle_selected.png"));
         ImageIcon ellipse = new ImageIcon(getClass().getResource("resources/ic_ellipse.png"));
+        ImageIcon ellipseSelected = new ImageIcon(getClass().getResource("resources/ic_ellipse_selected.png"));
         ImageIcon line = new ImageIcon(getClass().getResource("resources/ic_line.png"));
+        ImageIcon lineSelected = new ImageIcon(getClass().getResource("resources/ic_line_selected.png"));
         ImageIcon text = new ImageIcon(getClass().getResource("resources/ic_text.png"));
+        ImageIcon textSelected = new ImageIcon(getClass().getResource("resources/ic_text_selected.png"));
         ImageIcon file = new ImageIcon(getClass().getResource("resources/ic_file.png"));
+        ImageIcon fileSelected = new ImageIcon(getClass().getResource("resources/ic_file_selected.png"));
 
-        movShapeButton = new JButton(move);
-        delShapeButton = new JButton(delete);
-        rectShapeButton = new JButton(rectangle);
-        elliShapeButton = new JButton(ellipse);
-        lineShapeButton = new JButton(line);
-        textButton = new JButton(text);
-        fileButton = new JButton(file);
+        movShapeButton = new JToggleButton(move);
+        movShapeButton.setSelectedIcon(moveSelected);
+        delShapeButton = new JToggleButton(delete);
+        delShapeButton.setSelectedIcon(deleteSelected);
+        rectShapeButton = new JToggleButton(rectangle);
+        rectShapeButton.setSelectedIcon(rectangleSelected);
+        elliShapeButton = new JToggleButton(ellipse);
+        elliShapeButton.setSelectedIcon(ellipseSelected);
+        lineShapeButton = new JToggleButton(line);
+        lineShapeButton.setSelectedIcon(lineSelected);
+        textButton = new JToggleButton(text);
+        textButton.setSelectedIcon(textSelected);
+        fileButton = new JToggleButton(file);
+        fileButton.setSelectedIcon(fileSelected);
 
         movShapeButton.setActionCommand("Move");
         delShapeButton.setActionCommand("Delete");
@@ -46,59 +46,13 @@ public class SidebarPanel extends JToolBar {
         elliShapeButton.setActionCommand("Ellipse");
         lineShapeButton.setActionCommand("Line");
         textButton.setActionCommand("Text");
-        fileButton.setActionCommand("Image");
+        fileButton.setActionCommand("File");
 
-        strokeSlider = new JSlider(JSlider.VERTICAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
-        strokeSlider.setMajorTickSpacing(2);
-        strokeSlider.setMinorTickSpacing(1);
-        labelTable = new Hashtable();
-        Object put = labelTable.put(MIN_STROKE, new JLabel("1") );
-        labelTable.put(MAX_STROKE, new JLabel("10") );
-        strokeSlider.setLabelTable( labelTable );
+        JToggleButton[] jButtonArray = {fileButton, movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton, fileButton};
 
-        strokeSlider.setInverted(true);
-        strokeSlider.setSnapToTicks(true);
-        strokeSlider.setPaintTicks(true);
-        strokeSlider.setPaintLabels(true);
-
-        fillColorChooser = new JColorChooser(drawPanel.getFillColor());
-        strokeColorChooser = new JColorChooser(drawPanel.getStrokeColor());
-
-        previewPanel = new PreviewPanel(fillColorChooser, strokeColorChooser);
-        fillColorChooser.setPreviewPanel(new JPanel());
-        strokeColorChooser.setPreviewPanel(previewPanel);
-
-        tabs = fillColorChooser.getChooserPanels();
-        for (AbstractColorChooserPanel tab : tabs) {
-            fillColorChooser.removeChooserPanel(tab);
-        }
-        fillColorChooser.addChooserPanel(new ColorPanel());
-        fillColorChooser.setBorder(BorderFactory.createLineBorder(Color.black));
-        fillColorChooser.setMaximumSize(new Dimension(50,100));
-        fillColorChooser.setSize(new Dimension(50,100));
-        tabs = strokeColorChooser.getChooserPanels();
-        for (AbstractColorChooserPanel tab : tabs) {
-            String name = tab.getClass().getSimpleName();
-            if (!"DefaultSwatchChooserPanel".equals(name)) {
-                strokeColorChooser.removeChooserPanel(tab);
-            }
-        }
-
-        JButton[] jButtonArray = {fileButton, movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton, fileButton};
-
-        strokeSlider.addChangeListener(new InputHandler(drawPanel, previewPanel));
-        fillColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, fillColorChooser, mode.FILL));
-        strokeColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, strokeColorChooser, mode.STROKE));
-        drawPanel.addMouseListener(new InputHandler(drawPanel, previewPanel));
-        drawPanel.addMouseMotionListener(new InputHandler(drawPanel, previewPanel));
-
-        for (JButton button : jButtonArray) {
-            button.addActionListener(new InputHandler(drawPanel, previewPanel));
+        for (JToggleButton button : jButtonArray) {
+            button.addActionListener(new InputHandler(drawPanel, jButtonArray));
             add(button);
         }
-        
-        add(fillColorChooser);
-        //add(strokeColorChooser);
-        //add(strokeSlider);
     }
 }

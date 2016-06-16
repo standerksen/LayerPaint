@@ -7,7 +7,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import javax.swing.AbstractButton;
 import javax.swing.JSlider;
+import javax.swing.JToggleButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -15,21 +17,34 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
 
     private final DrawPanel drawPanel;
     private final PreviewPanel previewPanel;
+    private final JToggleButton[] buttons;
     private boolean backspace;
 
     public InputHandler(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
         previewPanel = null;
+        buttons = null;
     }
 
     protected InputHandler(DrawPanel drawPanel, PreviewPanel previewPanel) {
         this.drawPanel = drawPanel;
         this.previewPanel = previewPanel;
+        buttons = null;
+    }
+
+    InputHandler(DrawPanel drawPanel, JToggleButton[] jButtonArray) {
+        this.drawPanel = drawPanel;
+        previewPanel = null;
+        buttons = jButtonArray;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand() != null) {
+            for (JToggleButton button : buttons) {
+                button.setSelected(false);
+            }
+            ((AbstractButton) e.getSource()).setSelected(true);
             switch (e.getActionCommand()) {
                 case "Move":
                     this.drawPanel.setTool(ToolName.MOVE);
@@ -126,10 +141,21 @@ public class InputHandler implements ActionListener, ChangeListener, MouseListen
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-            backspace = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_DELETE) {
-            drawPanel.delete();
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_BACK_SPACE:
+                backspace = false;
+                break;
+            case KeyEvent.VK_DELETE:
+                drawPanel.delete();
+                break;
+            case KeyEvent.VK_PAGE_UP:
+                drawPanel.pageUp();
+                break;
+            case KeyEvent.VK_PAGE_DOWN:
+                drawPanel.pageDown();
+                break;
+            default:
+                break;
         }
     }
 }
