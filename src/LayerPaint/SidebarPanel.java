@@ -1,6 +1,7 @@
 package LayerPaint;
 
 import LayerPaint.ColorChanger.mode;
+import java.util.Hashtable;
 import javax.swing.*;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
@@ -17,6 +18,7 @@ public class SidebarPanel extends JToolBar {
 
     public SidebarPanel(DrawPanel drawPanel) {
         AbstractColorChooserPanel[] tabs;
+        Hashtable labelTable;
 
         this.setOrientation(JToolBar.VERTICAL);
 
@@ -41,9 +43,16 @@ public class SidebarPanel extends JToolBar {
         lineShapeButton.setActionCommand("Line");
         textButton.setActionCommand("Text");
 
-        strokeSlider = new JSlider(JSlider.HORIZONTAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
+        strokeSlider = new JSlider(JSlider.VERTICAL, MIN_STROKE, MAX_STROKE, INIT_STROKE);
         strokeSlider.setMajorTickSpacing(2);
         strokeSlider.setMinorTickSpacing(1);
+        labelTable = new Hashtable();
+        Object put = labelTable.put(MIN_STROKE, new JLabel("1") );
+        labelTable.put(MAX_STROKE, new JLabel("10") );
+        strokeSlider.setLabelTable( labelTable );
+
+        strokeSlider.setInverted(true);
+        strokeSlider.setSnapToTicks(true);
         strokeSlider.setPaintTicks(true);
         strokeSlider.setPaintLabels(true);
 
@@ -57,10 +66,12 @@ public class SidebarPanel extends JToolBar {
         tabs = fillColorChooser.getChooserPanels();
         for (AbstractColorChooserPanel tab : tabs) {
             String name = tab.getClass().getSimpleName();
-            if (!"DefaultSwatchChooserPanel".equals(name)) {
+            /*if (!"DefaultSwatchChooserPanel".equals(name)) {
                 fillColorChooser.removeChooserPanel(tab);
-            }
+            }*/
+            fillColorChooser.removeChooserPanel(tab);
         }
+        fillColorChooser.addChooserPanel(new ColorPanel());
 
         tabs = strokeColorChooser.getChooserPanels();
         for (AbstractColorChooserPanel tab : tabs) {
