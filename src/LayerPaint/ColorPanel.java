@@ -20,10 +20,6 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
-/**
- *
- * @author pieter
- */
 public class ColorPanel extends AbstractColorChooserPanel implements ActionListener {
 
     @Override
@@ -33,7 +29,7 @@ public class ColorPanel extends AbstractColorChooserPanel implements ActionListe
     @Override
     protected void buildChooser() {
         setLayout(new GridLayout(2, 0));
-        Border border = BorderFactory.createEmptyBorder(6,6,6,6);
+        Border border = BorderFactory.createEmptyBorder(10,10,10,10);
         ButtonGroup colorButtons = new ButtonGroup();
         
         List<ColorName> colors = new ArrayList<>();

@@ -18,10 +18,10 @@ public class Window extends JFrame {
         DrawPanel dp = new DrawPanel();
         dp.addKeyListener(new InputHandler(dp));
 
-        JToolBar tb = new SidebarPanel(dp);
+        JToolBar sb = new SidebarPanel(dp);
 
         getContentPane().add(dp, BorderLayout.CENTER);
-        getContentPane().add(tb, BorderLayout.WEST);
+        getContentPane().add(sb, BorderLayout.WEST);
 
         setVisible(true);
     }
