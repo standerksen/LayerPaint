@@ -62,10 +62,18 @@ public final class DrawPanel extends JPanel {
         if (selected instanceof Strokeable) {
             ((Strokeable) selected).setStroke(stroke);
             repaint();
+        } else if (selected instanceof MyText) {
+            ((MyText) selected).setSize(s);
+            repaint();
         }
     }
 
     public void setTool(ToolName tool) {
+        shapesList.stream().forEach((s) -> {
+            s.select(false);
+        });
+        selected = null;
+        repaint();
         this.tool = tool;
     }
 
@@ -144,10 +152,13 @@ public final class DrawPanel extends JPanel {
                     if (shapeAtClick(x, y) >= 0) {
                         shapesList.get(shapeAtClick(x, y)).select(true);
                         selected = shapesList.get(shapeAtClick(x, y));
+                        shapesList.remove(selected);
+                        shapesList.add(selected);
+                        repaint();
                     }
                     break;
                 case TEXT:
-                    shapesList.add(new MyText(x, y, fillColor));
+                    shapesList.add(new MyText(x, y, fillColor, (int) stroke.getLineWidth()));
                     shapesList.get(shapesList.size() - 1).select(true);
                     selected = shapesList.get(shapesList.size() - 1);
                     break;
@@ -182,7 +193,7 @@ public final class DrawPanel extends JPanel {
             shape = shapesList.get(shapesList.size() - 1);
             shape.setCoords(new Tuple4d(startx, starty, x, y));
             shapesList.set(shapesList.size() - 1, shape);
-        } else if (tool == ToolName.MOVE) {
+        } else if (tool == ToolName.MOVE || tool == ToolName.TEXT) {
             if (selected != null) {
                 if (lastx + lasty < 0) {
                     lastx = startx;
@@ -263,7 +274,6 @@ public final class DrawPanel extends JPanel {
                         y2 = (int) oldCoords.w;
                         break;
                 }
-
                 selected.setCoords(new Tuple4d(x1, y1, x2, y2));
             }
         }
@@ -276,6 +286,12 @@ public final class DrawPanel extends JPanel {
         startx = x;
         starty = y;
         Drawable shape = null;
+        if (tool != ToolName.TEXT && tool != ToolName.MOVE) {
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+            });
+        }
+
         if (tool == ToolName.RECTANGLE || tool == ToolName.ELLIPSE
                 || tool == ToolName.LINE || tool == ToolName.IMAGE) {
             switch (tool) {
@@ -295,9 +311,6 @@ public final class DrawPanel extends JPanel {
             shapesList.add(shape);
         } else if (tool == ToolName.MOVE) {
             if (movePoint == 0) {
-                shapesList.stream().forEach((s) -> {
-                    s.select(false);
-                });
                 if (shapeAtClick(x, y) >= 0 || movePoint > 0) {
                     shapesList.get(shapeAtClick(x, y)).select(true);
                     selected = shapesList.get(shapeAtClick(x, y));

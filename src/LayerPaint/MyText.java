@@ -7,6 +7,7 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 import static LayerPaint.SelectBox.SOLID_STROKE;
+import java.awt.Font;
 
 /**
  *
@@ -21,17 +22,31 @@ public class MyText implements Drawable, Fillable {
     private Color color;
     private SelectBox selectBox;
     private Line2D selectLine;
+    private Font font;
 
     public MyText() {
 
     }
 
-    public MyText(double x, double y, Color color) {
+    public MyText(double x, double y, Color color, int s) {
         this.x = x;
         this.y = y;
         this.color = color;
+        setFont(s * 10);
         selectBox = new SelectBox(x, y, 10, 10);
         selectLine = new Line2D.Double(x, y, x, y);
+    }
+    
+    public final void setFont(int i){
+        font = new Font(Font.SANS_SERIF, Font.PLAIN, i);
+    }
+    
+    public void setSize(int i){
+        setFont(i * 10);
+    }
+    
+    public int getSize(){
+        return font.getSize();
     }
 
     @Override
@@ -56,7 +71,7 @@ public class MyText implements Drawable, Fillable {
 
     @Override
     public void draw(Graphics2D g) {
-        System.out.println(string);
+        g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         height = fm.getHeight();
         width = fm.stringWidth(string);
@@ -76,7 +91,7 @@ public class MyText implements Drawable, Fillable {
 
     @Override
     public Tuple4d getCoords() {
-        return new Tuple4d(x, y, x + width, x + height);
+        return new Tuple4d(x, y, x + width, y - height);
     }
 
     @Override
