@@ -84,7 +84,7 @@ public class SidebarPanel extends JToolBar {
             }
         }
 
-        JButton[] jButtonArray = {movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton, fileButton};
+        JButton[] jButtonArray = {fileButton, movShapeButton, delShapeButton, lineShapeButton, rectShapeButton, elliShapeButton, textButton, fileButton};
 
         strokeSlider.addChangeListener(new InputHandler(drawPanel, previewPanel));
         fillColorChooser.getSelectionModel().addChangeListener(new ColorChanger(drawPanel, previewPanel, fillColorChooser, mode.FILL));
@@ -99,5 +99,6 @@ public class SidebarPanel extends JToolBar {
         
         add(fillColorChooser);
         //add(strokeColorChooser);
+        //add(strokeSlider);
     }
 }

@@ -297,6 +297,7 @@ public final class DrawPanel extends JPanel {
             switch (tool) {
                 case RECTANGLE:
                     shape = new MyRectangle(x, y, x, y, stroke, fillColor, strokeColor);
+                    
                     break;
                 case ELLIPSE:
                     shape = new MyEllipse(x, y, x, y, stroke, fillColor, strokeColor);

@@ -15,7 +15,7 @@ import javax.imageio.ImageIO;
  */
 public class MyImage implements Drawable {
 
-    private static final String IMG_PATH = "src/resources/black.png";
+    private static final String IMG_PATH = "src/LayerPaint/resources/black.png";
 
     public boolean selected;
     public SelectBox s;
@@ -90,10 +90,27 @@ public class MyImage implements Drawable {
 
     @Override
     public void setCoords(Tuple4d tuple) {
-        x1 = tuple.x;
-        y1 = tuple.y;
-        x2 = tuple.z;
-        y2 = tuple.w;
+        if((tuple.x < tuple.z && tuple.y < tuple.w) || (tuple.x == tuple.z && tuple.y == tuple.w)){
+            x1 = tuple.x;
+            y1 = tuple.y;
+            x2 = tuple.z;
+            y2 = tuple.w;
+        } else if(tuple.x > tuple.z && tuple.y < tuple.w) {
+            x1 = tuple.z;
+            y1 = tuple.y;
+            x2 = tuple.x;
+            y2 = tuple.w;
+        } else if(tuple.x < tuple.z && tuple.y > tuple.w){
+            x1 = tuple.x;
+            y1 = tuple.w;
+            x2 = tuple.z;
+            y2 = tuple.y;
+        } else if(tuple.x > tuple.z && tuple.y > tuple.w){
+            x1 = tuple.z;
+            y1 = tuple.w;
+            x2 = tuple.x;
+            y2 = tuple.y;
+        }
         s = new SelectBox(x1, y1, getWidth(), getHeight());
     }
 

@@ -19,7 +19,10 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
     }
 
     public MyRectangle(double x1, double y1, double x2, double y2, BasicStroke stroke, Color color, Color strokeColor) {
-        this.setCoords(new Tuple4d(x1, x2, y1, y2));
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
         this.stroke = stroke;
         this.color = color;
         this.strokeColor = strokeColor;
@@ -84,7 +87,7 @@ public class MyRectangle implements Drawable, Fillable, Strokeable {
 
     @Override
     public void setCoords(Tuple4d tuple) {
-        if(tuple.x < tuple.z && tuple.y < tuple.w){
+        if((tuple.x < tuple.z && tuple.y < tuple.w) || (tuple.x == tuple.z && tuple.y == tuple.w)){
             x1 = tuple.x;
             y1 = tuple.y;
             x2 = tuple.z;
