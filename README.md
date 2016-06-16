@@ -1,2 +1,0 @@
-# LayerPaint
-Simple paint application.

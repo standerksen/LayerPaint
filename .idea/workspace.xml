@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f89a4ee-8f86-4c6c-9130-b1023d2b459c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel$1.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/DrawPanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyRectangle.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyRectangle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyText.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/MyText.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/SidebarPanel.class" afterPath="$PROJECT_DIR$/out/production/LayerPaint/LayerPaint/SidebarPanel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/ColorPanel.java" afterPath="$PROJECT_DIR$/src/LayerPaint/ColorPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java" afterPath="$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/LayerPaint/Window.java" afterPath="$PROJECT_DIR$/src/LayerPaint/Window.java" />
     </list>
     <ignored path="LayerPaint.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,18 +36,18 @@
       <file leaf-file-name="LayerPaint.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/LayerPaint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
+            <state relative-caret-position="72">
               <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SidebarPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SidebarPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+            <state relative-caret-position="1512">
+              <caret line="84" column="139" selection-start-line="84" selection-start-column="139" selection-end-line="84" selection-end-column="139" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,10 +55,32 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Window.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/LayerPaint/Window.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColorPanel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/LayerPaint/ColorPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/InputHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
+            <state relative-caret-position="522">
               <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
               <folding />
             </state>
@@ -60,8 +90,8 @@
       <file leaf-file-name="DrawPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LayerPaint/DrawPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="-468">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,9 +122,10 @@
         <option value="$PROJECT_DIR$/src/LayerPaint/ButtonPanel.java" />
         <option value="$PROJECT_DIR$/src/LayerPaint/InputHandler.java" />
         <option value="$PROJECT_DIR$/src/LayerPaint/LayerPaint.java" />
-        <option value="$PROJECT_DIR$/src/LayerPaint/Window.java" />
         <option value="$PROJECT_DIR$/src/LayerPaint/DrawPanel.java" />
+        <option value="$PROJECT_DIR$/src/LayerPaint/ColorPanel.java" />
         <option value="$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java" />
+        <option value="$PROJECT_DIR$/src/LayerPaint/Window.java" />
       </list>
     </option>
   </component>
@@ -260,7 +291,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -299,8 +332,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -763,12 +794,13 @@
       <option name="presentableId" value="Default" />
       <updated>1465562283243</updated>
       <workItem from="1465562284792" duration="12395000" />
-      <workItem from="1466006920332" duration="1028000" />
+      <workItem from="1466006920332" duration="1059000" />
+      <workItem from="1466083947397" duration="2788000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13423000" />
+    <option name="totallyTimeSpent" value="16242000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="49" y="24" width="1871" height="1056" extended-state="6" />
@@ -823,6 +855,40 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/LayerPaint.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/InputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/DrawPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/LayerPaint.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="5" column="44" selection-start-line="5" selection-start-column="44" selection-end-line="5" selection-end-column="44" />
           <folding />
@@ -859,52 +925,59 @@
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/Test.form" />
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/Test.java" />
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/ButtonPanel.java" />
-    <entry file="file://$PROJECT_DIR$/src/LayerPaint/LayerPaint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/Fillable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/ColorPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/LayerPaint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/InputHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
+        <state relative-caret-position="522">
           <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LayerPaint/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="54" selection-start-line="19" selection-start-column="54" selection-end-line="19" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/DrawPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        <state relative-caret-position="-468">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LayerPaint/SidebarPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
+        <state relative-caret-position="1512">
+          <caret line="84" column="139" selection-start-line="84" selection-start-column="139" selection-end-line="84" selection-end-column="139" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LayerPaint/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

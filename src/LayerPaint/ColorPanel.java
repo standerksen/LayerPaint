@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LayerPaint;
 
 import java.awt.Color;
@@ -21,10 +16,6 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
-/**
- *
- * @author pieter
- */
 public class ColorPanel extends AbstractColorChooserPanel implements ActionListener {
 
     @Override
@@ -33,10 +24,9 @@ public class ColorPanel extends AbstractColorChooserPanel implements ActionListe
 
     @Override
     protected void buildChooser() {
-        setLayout(new FlowLayout(FlowLayout.TRAILING));
-        Border border = BorderFactory.createEmptyBorder(11,11,11,11);
+        setLayout(new GridLayout(2, 0));
+        Border border = BorderFactory.createEmptyBorder(10,10,10,10);
         ButtonGroup colorButtons = new ButtonGroup();
-        
         
         List<ColorName> colors = new ArrayList<>();
         colors.add(new ColorName("Red", Color.RED));
