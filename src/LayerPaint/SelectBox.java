@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  */
 public class SelectBox extends JPanel {
 
-    public static final double BOX_SIZE = 5;
+    public static final double BOX_SIZE = 7;
 
     static final Stroke DASHED_STROKE = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 10.0f, new float[]{2}, 0);
     static final Stroke SOLID_STROKE = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
