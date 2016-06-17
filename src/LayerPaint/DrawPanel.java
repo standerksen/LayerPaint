@@ -17,6 +17,7 @@ public final class DrawPanel extends JPanel {
     private Drawable selected;
     private BasicStroke stroke = new BasicStroke((float) 1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
     private Color fillColor = Color.WHITE, strokeColor = Color.BLACK;
+    private ToolName oldTool;
 
     public DrawPanel() {
         super();
@@ -70,6 +71,7 @@ public final class DrawPanel extends JPanel {
     }
 
     public void setTool(ToolName tool) {
+        oldTool = null;
         if(tool != ToolName.MOVE){
             shapesList.stream().forEach((s) -> {
                 s.select(false);
@@ -152,11 +154,18 @@ public final class DrawPanel extends JPanel {
                     }
                     break;
                 case MOVE:
+                    if(oldTool != null && ((shapeAtClick(x, y) >= 0 && shapesList.get(shapeAtClick(x, y)) != selected) || shapeAtClick(x,y) == -1 ) ){
+                        System.out.println(oldTool);
+                        tool = oldTool;
+                        break;
+                    }
                     if (shapeAtClick(x, y) >= 0) {
                         shapesList.get(shapeAtClick(x, y)).select(true);
                         selected = shapesList.get(shapeAtClick(x, y));
                         repaint();
                     }
+                    
+                    
                     break;
                 case TEXT:
                     shapesList.add(new MyText(x, y, fillColor, (int) stroke.getLineWidth()));
@@ -164,6 +173,9 @@ public final class DrawPanel extends JPanel {
                     selected = shapesList.get(shapesList.size() - 1);
                     break;
                 default:
+                    if(oldTool != null){
+                        tool = oldTool;
+                    }
             }
         }
         repaint();
@@ -287,11 +299,16 @@ public final class DrawPanel extends JPanel {
         startx = x;
         starty = y;
         Drawable shape = null;
-        if (tool != ToolName.TEXT && tool != ToolName.MOVE) {
+        if ((tool != ToolName.TEXT && tool != ToolName.MOVE) || (oldTool != null && tool == ToolName.MOVE)) {
             shapesList.stream().forEach((s) -> {
                 s.select(false);
             });
             selected = null;
+        }
+        if(tool != ToolName.MOVE){
+            oldTool = null;
+        } else if(oldTool != null && ((shapeAtClick(x, y) >= 0 && shapesList.get(shapeAtClick(x, y)) != selected) || shapeAtClick(x,y) == -1 ) ){
+            tool = oldTool;
         }
 
         if (tool == ToolName.RECTANGLE || tool == ToolName.ELLIPSE
@@ -299,7 +316,6 @@ public final class DrawPanel extends JPanel {
             switch (tool) {
                 case RECTANGLE:
                     shape = new MyRectangle(x, y, x, y, stroke, fillColor, strokeColor);
-
                     break;
                 case ELLIPSE:
                     shape = new MyEllipse(x, y, x, y, stroke, fillColor, strokeColor);
@@ -326,15 +342,17 @@ public final class DrawPanel extends JPanel {
     public void stopClick(int x, int y) {
         startx = 0;
         starty = 0;
+        
         if (tool != ToolName.DELETE) {
             if (x == startx && y == starty) {
                 shapesList.remove(shapesList.size() - 1);
             }
         }
         if(tool == ToolName.ELLIPSE || tool == ToolName.IMAGE || tool == ToolName.RECTANGLE || tool == ToolName.LINE){
-            //setTool(ToolName.MOVE);
-            //shapesList.get(shapesList.size() - 1).select(true);
-            //selected = shapesList.get(shapesList.size() - 1);
+            oldTool = tool;
+            tool = ToolName.MOVE;
+            shapesList.get(shapesList.size() - 1).select(true);
+            selected = shapesList.get(shapesList.size() - 1);
             repaint();
         }
         lastx = -1;
