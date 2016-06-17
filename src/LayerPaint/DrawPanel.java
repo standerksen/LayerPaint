@@ -332,9 +332,9 @@ public final class DrawPanel extends JPanel {
             }
         }
         if(tool == ToolName.ELLIPSE || tool == ToolName.IMAGE || tool == ToolName.RECTANGLE || tool == ToolName.LINE){
-            setTool(ToolName.MOVE);
-            shapesList.get(shapesList.size() - 1).select(true);
-            selected = shapesList.get(shapesList.size() - 1);
+            //setTool(ToolName.MOVE);
+            //shapesList.get(shapesList.size() - 1).select(true);
+            //selected = shapesList.get(shapesList.size() - 1);
             repaint();
         }
         lastx = -1;
