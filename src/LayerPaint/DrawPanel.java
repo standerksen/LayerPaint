@@ -299,7 +299,7 @@ public final class DrawPanel extends JPanel {
         startx = x;
         starty = y;
         Drawable shape = null;
-        if ((tool != ToolName.TEXT && tool != ToolName.MOVE) || (oldTool != null && tool == ToolName.MOVE)) {
+        if ((tool != ToolName.TEXT && tool != ToolName.MOVE)) {
             shapesList.stream().forEach((s) -> {
                 s.select(false);
             });
@@ -309,6 +309,10 @@ public final class DrawPanel extends JPanel {
             oldTool = null;
         } else if(oldTool != null && ((shapeAtClick(x, y) >= 0 && shapesList.get(shapeAtClick(x, y)) != selected) || shapeAtClick(x,y) == -1 ) ){
             tool = oldTool;
+            shapesList.stream().forEach((s) -> {
+                s.select(false);
+            });
+            selected = null;
         }
 
         if (tool == ToolName.RECTANGLE || tool == ToolName.ELLIPSE
