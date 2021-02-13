@@ -1,2 +1,2 @@
 # LayerPaint
-Simple paint application for course _Human Computer Interaction_ at _Radboud University Nijmegen_.
+Simple paint application for course _Human Computer Interaction (SOW-BKI114)_ at _Radboud University Nijmegen_.
